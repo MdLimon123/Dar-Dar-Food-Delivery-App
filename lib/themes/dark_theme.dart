@@ -19,7 +19,7 @@ ThemeData dark({Color color = const Color(0xFF2683EB)}) => ThemeData(
 
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.fillColor,
+
     hintStyle: TextStyle(color:AppColors.hintColor,fontSize:16.sp),
     isDense: true,
     contentPadding:EdgeInsets.symmetric(

@@ -1,6 +1,8 @@
+import 'package:dar_dar_foodd_delivery_app/helpers/route.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_icons.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   const SelectRoleScreen({super.key});
@@ -24,7 +26,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
               child: Image.asset(AppIcons.appLogo),
             ),
             const SizedBox(height: 50),
-            CustomButton(onTap: (){},
+            CustomButton(onTap: (){
+              Get.offAllNamed(AppRoutes.userLoginScreen);
+            },
                 text: "User"),
             SizedBox(height: 10,),
             CustomButton(onTap: (){},

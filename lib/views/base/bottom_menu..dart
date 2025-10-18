@@ -9,10 +9,10 @@ import 'package:get/get.dart';
 
 import '../../utils/app_colors.dart';
 
-class BottomMenu extends StatelessWidget {
+class UserBottomMenu extends StatelessWidget {
   final int menuIndex;
 
-  const BottomMenu(this.menuIndex, {super.key});
+  const UserBottomMenu(this.menuIndex, {super.key});
 
   Color colorByIndex(ThemeData theme, int index) {
     return index == menuIndex ? AppColors.primaryColor : theme.disabledColor;
@@ -37,9 +37,9 @@ class BottomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     List<BottomNavigationBarItem> menuItems = [
-      getItem(AppIcons.homeIcon, 'Home', theme, 0),
+      getItem(AppIcons.homeIcon, 'UserHomeScreen', theme, 0),
       getItem(AppIcons.walletIcon, 'Wallet', theme, 1),
-      getItem(AppIcons.profileIcon, 'Profile', theme, 2),
+      getItem(AppIcons.profileIcon, 'UserProfileScreen', theme, 2),
     ];
 
     return Container(
@@ -66,13 +66,13 @@ class BottomMenu extends StatelessWidget {
           onTap: (value) {
             switch (value) {
               case 0:
-                Get.offAndToNamed(AppRoutes.homeScreen);
+                Get.offAndToNamed(AppRoutes.userHomeScreen);
                 break;
               case 1:
                 Get.offAndToNamed(AppRoutes.walletScreen);
                 break;
               case 2:
-                Get.offAndToNamed(AppRoutes.profileScreen);
+                Get.offAndToNamed(AppRoutes.userProfileScreen);
                 break;
             }
           },
