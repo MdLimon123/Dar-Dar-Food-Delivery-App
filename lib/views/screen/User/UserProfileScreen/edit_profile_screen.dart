@@ -1,29 +1,26 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-
-class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<UserProfileScreen> createState() => _UserProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
-
+class _EditProfileScreenState extends State<EditProfileScreen> {
   final nameTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+       return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppbar(
-        title: "Profile",
+        title: "Edit Profile",
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
@@ -82,34 +79,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
                   /// Edit icon (top right)
                   Positioned(
-                    top: 0,
-                    right: 0,
-                    child: InkWell(
-                      onTap: (){
-                        Get.to(()=> EditProfileScreen());
-                      },
-                      child: SvgPicture.asset(
-                        'assets/icons/edit.svg',
-                        height: 20,
-                        width: 20,
+                    top: 55,
+                    right: 135,
+                    child: Container(
+                      height: 24,
+                      width: 24,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF656565),
+                            blurRadius: 4,
+                            offset: Offset(0, 4)
+                          )]
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: SvgPicture.asset("assets/icons/camera.svg"),
                       ),
                     ),
-                  ),
-
+                  )
 
                 ],
               ),
               SizedBox(height: 67,),
               _headingText(
-                title: "User Name"
+                  title: "User Name"
               ),
               SizedBox(height: 12,),
               CustomTextField(controller: nameTextController,
-              filColor: Color(0xFFEBEBEB),
-              hintText: "Full Name",),
+                filColor: Color(0xFFEBEBEB),
+                hintText: "Full Name",),
               SizedBox(height: 12,),
               _headingText(
-                title: "Email"
+                  title: "Email"
               ),
               SizedBox(height: 12,),
               CustomTextField(
@@ -136,7 +140,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 controller: nameTextController,
                 filColor: Color(0xFFEBEBEB),
                 hintText: "Stockton, New Hampshire",
-              )
+              ),
+              SizedBox(height: 40,),
+              CustomButton(onTap: (){},
+                  text: "Save")
             ],
           ),
         ),
@@ -148,10 +155,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Text _headingText({required String title}) {
     return Text(title,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Color(0xFF3A3A35),
-            ),);
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Color(0xFF3A3A35),
+      ),);
   }
 }

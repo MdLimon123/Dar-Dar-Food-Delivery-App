@@ -1,26 +1,27 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/popular_meal_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/popular_grocery_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class NearbyRestaurantScreen extends StatefulWidget {
-  const NearbyRestaurantScreen({super.key});
+class NearbyGroceryScreen extends StatefulWidget {
+  const NearbyGroceryScreen({super.key});
 
   @override
-  State<NearbyRestaurantScreen> createState() => _NearbyRestaurantScreenState();
+  State<NearbyGroceryScreen> createState() => _NearbyGroceryScreenState();
 }
 
-class _NearbyRestaurantScreenState extends State<NearbyRestaurantScreen> {
+class _NearbyGroceryScreenState extends State<NearbyGroceryScreen> {
   final searchTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CustomAppbar(title: "Near By Restaurant",),
+      appBar: CustomAppbar(title: "Near By Grocery",),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
         child: Column(
@@ -41,11 +42,11 @@ class _NearbyRestaurantScreenState extends State<NearbyRestaurantScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: (){
-                      Get.to(()=> PopularMealScreen());
+                      Get.to(()=> PopularGroceryScreen());
                     },
                     child: SizedBox(
                         width: 265,
-                        child: FoodCard()),
+                        child: GroceryCard()),
                   );
                 },
               ),

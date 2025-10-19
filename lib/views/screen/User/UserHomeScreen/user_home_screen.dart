@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
-import 'package:dar_dar_foodd_delivery_app/views/base/custom_meal_card.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_grocery_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_restaurant_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -181,12 +183,17 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                      fontWeight: FontWeight.w600,
                      color: AppColors.textColor
                  ),),
-               Text("View All",
-                 style: TextStyle(
-                     fontSize: 12,
-                     fontWeight: FontWeight.w400,
-                     color: Color(0xFFF35E24)
-                 ),)
+               InkWell(
+                 onTap: (){
+                   Get.to(()=> NearbyGroceryScreen());
+                 },
+                 child: Text("View All",
+                   style: TextStyle(
+                       fontSize: 12,
+                       fontWeight: FontWeight.w400,
+                       color: Color(0xFFF35E24)
+                   ),),
+               )
              ],
            ),
            SizedBox(height: 10,),
@@ -372,7 +379,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> UserProfileScreen());
+            },
             title: "Profile",
             icon: "assets/icons/profile.svg",
           ),

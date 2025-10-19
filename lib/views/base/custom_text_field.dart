@@ -103,7 +103,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderSide: BorderSide.none
           ),
           filled: true,
-          fillColor:Color(0xFFFEFEFE),
+          fillColor: widget.filColor ?? Color(0xFFFEFEFE),
           prefixIcon: widget.prefixIcon,
           suffixIcon: widget.isPassword
               ? GestureDetector(
