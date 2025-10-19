@@ -15,7 +15,7 @@ class UserBottomMenu extends StatelessWidget {
   const UserBottomMenu(this.menuIndex, {super.key});
 
   Color colorByIndex(ThemeData theme, int index) {
-    return index == menuIndex ? AppColors.primaryColor : theme.disabledColor;
+    return index == menuIndex ? Colors.white : Color(0xFFE1E1E1);
   }
 
   BottomNavigationBarItem getItem(
@@ -37,16 +37,19 @@ class UserBottomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     List<BottomNavigationBarItem> menuItems = [
-      getItem(AppIcons.homeIcon, 'UserHomeScreen', theme, 0),
-      getItem(AppIcons.walletIcon, 'Wallet', theme, 1),
-      getItem(AppIcons.profileIcon, 'UserProfileScreen', theme, 2),
+      getItem(AppIcons.homeIcon, 'Home', theme, 0),
+      getItem(AppIcons.shop, 'Shop', theme, 1),
+      getItem(AppIcons.food, 'Food', theme, 2),
+      getItem(AppIcons.cart, 'Cart', theme, 3),
+      getItem(AppIcons.order, 'Orders', theme, 4),
     ];
 
     return Container(
 
       decoration: BoxDecoration(
+
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20.r),topLeft: Radius.circular(20.r)
+              topRight: Radius.circular(8),topLeft: Radius.circular(8)
           ),
           boxShadow: const [
             BoxShadow(color:Colors.black38,spreadRadius:0,blurRadius: 10)
@@ -54,13 +57,14 @@ class UserBottomMenu extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20.r),topLeft: Radius.circular(20.r)
+            topRight: Radius.circular(8),topLeft: Radius.circular(8)
 
         ),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          
-          selectedItemColor:Theme.of(context).primaryColor,
+          backgroundColor: Color(0xFF89B12C),
+          selectedItemColor:Color(0xFFFEFEFE),
+          unselectedItemColor: Color(0xFFE1E1E1),
           currentIndex: menuIndex,
           
           onTap: (value) {
@@ -69,10 +73,16 @@ class UserBottomMenu extends StatelessWidget {
                 Get.offAndToNamed(AppRoutes.userHomeScreen);
                 break;
               case 1:
-                Get.offAndToNamed(AppRoutes.walletScreen);
+                Get.offAndToNamed(AppRoutes.userShopScreen);
                 break;
               case 2:
-                Get.offAndToNamed(AppRoutes.userProfileScreen);
+                Get.offAndToNamed(AppRoutes.userFoodScreen);
+                break;
+              case 3:
+                Get.offAndToNamed(AppRoutes.userCartScreen);
+                break;
+              case 4:
+                Get.offAndToNamed(AppRoutes.userOrderScreen);
                 break;
             }
           },

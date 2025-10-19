@@ -1,9 +1,13 @@
+import 'package:dar_dar_foodd_delivery_app/helpers/route.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/forget_password_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/user_signup_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserLoginScreen extends StatefulWidget {
   const UserLoginScreen({super.key});
@@ -85,15 +89,22 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                 
                 )),
               Spacer(),
-              Text("Forgot Password?",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                    color: Color(0xFF96C330),
-                    fontSize: 12))
+              InkWell(
+                onTap: (){
+                  Get.to(()=> ForgetPasswordScreen());
+                },
+                child: Text("Forgot Password?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                      color: Color(0xFF96C330),
+                      fontSize: 12)),
+              )
             ],
           ),
           SizedBox(height: 50,),
-          CustomButton(onTap: (){},
+          CustomButton(onTap: (){
+            Get.offAllNamed(AppRoutes.userHomeScreen);
+          },
               text: "Sign in"),
           SizedBox(height: 22,),
           Center(
@@ -113,7 +124,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                         fontWeight: FontWeight.w400),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-
+                      Get.to(()=>UserSignupScreen());
                       },
                   ),
                 ],
