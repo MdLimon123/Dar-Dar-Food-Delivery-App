@@ -438,6 +438,69 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       trailing: trailingIcon != null ? SvgPicture.asset(trailingIcon) : null,
     );}
 
+  // Widget _buildCarouselItem(Map<String, dynamic> item) {
+  //   return Container(
+  //     margin: const EdgeInsets.all(5.0),
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(8),
+  //       color: item['backgroundColor'],
+  //     ),
+  //     child: Row(
+  //       children: [
+  //         Expanded(
+  //           flex: 2,
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(10.0),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 Text(
+  //                   item['title'],
+  //                   style:  TextStyle(
+  //                     color: Color(0xFFF7F7F7),
+  //                     fontSize: 30,
+  //                     fontWeight: FontWeight.w500,
+  //                   ),
+  //                 ),
+  //                 Text(
+  //                   item['subtitle'],
+  //                   style: TextStyle(
+  //                     color: Color(0xFFFEFEFE),
+  //                     fontSize: 14,
+  //                     fontWeight: FontWeight.w500,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(height: 8),
+  //                 Text(
+  //                   item['description'],
+  //                   style: TextStyle(
+  //                     fontWeight: FontWeight.w400,
+  //                     color: Color(0xFFFEFEFE),
+  //                     fontSize: 10,
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //
+  //         Expanded(
+  //           flex: 4,
+  //           child: Container(
+  //             decoration: BoxDecoration(
+  //               image: DecorationImage(
+  //                 image: AssetImage(item['imagePath']),
+  //                 fit: BoxFit.fill,
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _buildCarouselItem(Map<String, dynamic> item) {
     return Container(
       margin: const EdgeInsets.all(5.0),
@@ -448,16 +511,17 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       child: Row(
         children: [
           Expanded(
-            flex: 5,
+            flex: 2,
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min, // 👈 prevents Column from expanding too much
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     item['title'],
-                    style:  TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFFF7F7F7),
                       fontSize: 30,
                       fontWeight: FontWeight.w500,
@@ -465,7 +529,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   ),
                   Text(
                     item['subtitle'],
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFFFEFEFE),
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -474,7 +538,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   const SizedBox(height: 8),
                   Text(
                     item['description'],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       color: Color(0xFFFEFEFE),
                       fontSize: 10,
@@ -484,14 +548,16 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               ),
             ),
           ),
-  
           Expanded(
             flex: 4,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(item['imagePath']),
-                  fit: BoxFit.fill,
+            child: AspectRatio(     // 👈 ensures image keeps proportion
+              aspectRatio: 1.2,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(item['imagePath']),
+                    fit: BoxFit.cover, // 👈 better than fill
+                  ),
                 ),
               ),
             ),
@@ -500,6 +566,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ),
     );
   }
+
 }
 
 
