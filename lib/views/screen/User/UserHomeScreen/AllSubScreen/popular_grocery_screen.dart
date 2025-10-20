@@ -4,6 +4,7 @@ import 'package:dar_dar_foodd_delivery_app/views/base/_custom_popular_grocery_ca
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserShopScreen/AllSubScreen/all_popular_categories_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserShopScreen/AllSubScreen/all_popular_fruits_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -224,7 +225,19 @@ class _PopularGroceryScreenState extends State<PopularGroceryScreen> {
                 ),),
               SizedBox(width: 5,),
 
-              SvgPicture.asset("assets/icons/hot.svg")
+              SvgPicture.asset("assets/icons/hot.svg"),
+              Spacer(),
+              InkWell(
+                onTap: (){
+                  Get.to(()=> AllPopularFruitsScreen());
+                },
+                child: Text("View All ",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFFF35E24)
+                ),),
+              )
             ],
           ),
           SizedBox(height: 12,),
