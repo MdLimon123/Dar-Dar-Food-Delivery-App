@@ -1,8 +1,10 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserCardScreen/AllSubScreen/check_out_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -256,7 +258,9 @@ class _CardScreenState extends State<CardScreen> {
           SizedBox(height: 25,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: CustomButton(onTap: (){},
+            child: CustomButton(onTap: (){
+              Get.to(()=> CheckOutScreen());
+            },
                 text: "Check Out"),
           )
 
