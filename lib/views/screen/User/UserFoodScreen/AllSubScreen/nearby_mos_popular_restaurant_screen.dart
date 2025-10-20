@@ -1,20 +1,21 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
-import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart' show FoodCard;
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserFoodScreen/AllSubScreen/most_popular_food_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/popular_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class NearbyRestaurantScreen extends StatefulWidget {
-  const NearbyRestaurantScreen({super.key});
+class NearbyMostPopularRestaurantScreen extends StatefulWidget {
+  const NearbyMostPopularRestaurantScreen({super.key});
 
   @override
-  State<NearbyRestaurantScreen> createState() => _NearbyRestaurantScreenState();
+  State<NearbyMostPopularRestaurantScreen> createState() => _NearbyMostPopularRestaurantScreenState();
 }
 
-class _NearbyRestaurantScreenState extends State<NearbyRestaurantScreen> {
+class _NearbyMostPopularRestaurantScreenState extends State<NearbyMostPopularRestaurantScreen> {
   final searchTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class _NearbyRestaurantScreenState extends State<NearbyRestaurantScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: (){
-                      Get.to(()=> PopularMealScreen());
+                      Get.to(()=> MostPopularFoodScreen());
                     },
                     child: SizedBox(
                         width: 265,
