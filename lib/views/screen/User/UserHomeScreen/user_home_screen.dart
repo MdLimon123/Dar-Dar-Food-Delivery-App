@@ -4,9 +4,14 @@ import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/Notification/notification_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_grocery_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_restaurant_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/AllSubScreen/order_history_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/terms_and_conditon_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/profile_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -290,7 +295,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       actions: [
        /// Notification icon
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.to(()=> NotificationScreen());
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
@@ -345,25 +352,33 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-              onTap: (){},
+              onTap: (){
+                Get.to(()=> FaqScreen());
+              },
               title: "FAQ",
               icon: "assets/icons/faq.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> PrivacyPolicyScreen());
+            },
             title: "Privacy Policy",
             icon: "assets/icons/privacy.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> TermsAndConditionScreen());
+            },
             title: "Terms & Conditions",
             icon: "assets/icons/terms.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> FeedbackScreen());
+            },
             title: "Feedback",
             icon: "assets/icons/feedback.svg",
           ),
