@@ -75,6 +75,7 @@ class _UserSignupScreenState extends State<UserSignupScreen> {
           ),
           SizedBox(height: 12,),
           CustomTextField(controller: passwordTextController,
+            maxLine: 1,
             isPassword: true,
             hintText: "Enter your password",),
           SizedBox(height: 12,),
@@ -84,6 +85,7 @@ class _UserSignupScreenState extends State<UserSignupScreen> {
           SizedBox(height: 12,),
           CustomTextField(
             controller: confirmTextController,
+            maxLine: 1,
             isPassword: true,
             hintText: "Confirm your password",),
           SizedBox(height: 24,),

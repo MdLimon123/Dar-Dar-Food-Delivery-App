@@ -1,6 +1,7 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserCardScreen/AllSubScreen/edit_address_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserCardScreen/AllSubScreen/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,12 +31,36 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Delivery Address",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.textColor
-                ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Delivery Address",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textColor
+                    ),),
+                    InkWell(
+                      onTap: (){
+                        Get.to(()=> EditAddressScreen());
+                      },
+                      child: Container(
+                        height: 32,
+                        width: 114,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF5B52A3),
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(child: Text("Edit Address",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white
+                        ),)),
+                      ),
+                    )
+                  ],
+                ),
                 SizedBox(height: 4,),
                 Text("Name: User Name",
                 style: TextStyle(

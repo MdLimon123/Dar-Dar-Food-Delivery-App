@@ -513,9 +513,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(5.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min, // 👈 prevents Column from expanding too much
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

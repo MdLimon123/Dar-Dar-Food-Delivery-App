@@ -282,7 +282,7 @@ class _PopularGroceryScreenState extends State<PopularGroceryScreen> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min, // 👈 prevents Column from expanding too much
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

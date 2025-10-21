@@ -65,6 +65,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
           ),
           SizedBox(height: 12,),
           CustomTextField(controller: emailTextController,
+          maxLine: 1,
           isPassword: true,
           hintText: "Enter your password ",),
           SizedBox(height: 15,),

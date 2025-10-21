@@ -48,6 +48,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           _headingText(text: "Enter New Password"),
           SizedBox(height: 10,),
           CustomTextField(controller: newPasswordController,
+          maxLine: 1,
           hintText: "Enter your new password",
           isPassword: true,),
           SizedBox(height: 12,),
