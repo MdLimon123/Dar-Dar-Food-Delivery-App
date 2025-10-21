@@ -4,6 +4,7 @@ import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/Notification/notification_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_grocery_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_restaurant_screen.dart';
@@ -11,6 +12,7 @@ import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/Al
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/settings_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/terms_and_conditon_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/profile_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/wish_list_screen.dart';
@@ -408,34 +410,41 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> SettingsScreen());
+            },
             title: "Settings",
             icon: "assets/icons/setting.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           SizedBox(height: 100,),
-          Container(
-            width: 168,
-            padding: EdgeInsets.symmetric(horizontal: 28),
-            margin: EdgeInsets.only(left: 28, right: 50, bottom: 50),
-            height: 54,
-            decoration: BoxDecoration(
-              color: Color(0xFF89B12C),
-              borderRadius: BorderRadius.circular(4)
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SvgPicture.asset('assets/icons/logout.svg'),
-                SizedBox(width: 8,),
-                Text('Logout',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white
-                ),)
-              ],
+          InkWell(
+            onTap: (){
+              Get.to(()=> SelectRoleScreen());
+            },
+            child: Container(
+              width: 168,
+              padding: EdgeInsets.symmetric(horizontal: 28),
+              margin: EdgeInsets.only(left: 28, right: 50, bottom: 50),
+              height: 54,
+              decoration: BoxDecoration(
+                color: Color(0xFF89B12C),
+                borderRadius: BorderRadius.circular(4)
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset('assets/icons/logout.svg'),
+                  SizedBox(width: 8,),
+                  Text('Logout',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white
+                  ),)
+                ],
+              ),
             ),
           )
 
