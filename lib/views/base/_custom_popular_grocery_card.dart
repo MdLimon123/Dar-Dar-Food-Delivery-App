@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 class PopularGroceryCard extends StatelessWidget {
   final Map<String, dynamic> item;
-  const PopularGroceryCard({super.key, required this.item});
+  final IconData icon;
+  const PopularGroceryCard({super.key, required this.item,this.icon = Icons.favorite_border});
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +54,8 @@ class PopularGroceryCard extends StatelessWidget {
                       color: Color(0xFFF7F7F7),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
-                      Icons.favorite_border,
+                    child:  Icon(
+                      icon,
                       color: Color(0xFF89B12C),
                       size: 18,
                     ),

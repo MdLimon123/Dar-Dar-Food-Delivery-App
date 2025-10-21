@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FoodCard extends StatelessWidget {
-  const FoodCard({super.key});
+
+  final IconData icon;
+
+  FoodCard({super.key, this.icon = Icons.favorite_border});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,6 @@ class FoodCard extends StatelessWidget {
 
           Stack(
             children:[
-
               ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8),
@@ -45,8 +47,6 @@ class FoodCard extends StatelessWidget {
                 left: 15,
                 child: RatingPill(rating: 4.8, count: 24),
               ),
-
-
               Positioned(
                 top: 15,
                 right: 15,
@@ -62,8 +62,8 @@ class FoodCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Icon(
-                    Icons.favorite_border,
+                  child:  Icon(
+                     icon,
                     color: Color(0xFF89B12C),
                     size: 24,
                   ),

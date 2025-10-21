@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
   final Map<String, dynamic> item;
-  const MealCard({super.key, required this.item});
+  final IconData icon;
+  const MealCard({super.key, required this.item, this.icon = Icons.favorite_border});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +47,8 @@ class MealCard extends StatelessWidget {
                     color: Color(0xFFF7F7F7),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.favorite_border,
+                  child:  Icon(
+                    icon,
                     color: Color(0xFF89B12C),
                     size: 18,
                   ),

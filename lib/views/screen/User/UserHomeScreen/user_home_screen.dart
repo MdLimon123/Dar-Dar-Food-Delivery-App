@@ -6,7 +6,9 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_grocery_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_restaurant_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/AllSubScreen/order_history_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/profile_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -367,13 +369,17 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> OrderHistoryScreen());
+            },
             title: "History",
             icon: "assets/icons/history.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){},
+            onTap: (){
+              Get.to(()=> WishListScreen());
+            },
             title: "Wish List",
             icon: "assets/icons/favorite.svg",
           ),
