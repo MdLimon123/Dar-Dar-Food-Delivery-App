@@ -1,7 +1,9 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorHomeScreen/AllSubScreen/vendor_order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class VendorOrderScreen extends StatefulWidget {
   const VendorOrderScreen({super.key});
@@ -113,9 +115,14 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> with TickerProvid
       itemCount: orders.length,
       itemBuilder: (context, index) {
         final item = orders[index];
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: _orderCard(item),
+        return InkWell(
+          onTap: (){
+            Get.to(()=> VendorOrderDetailsScreen());
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _orderCard(item),
+          ),
         );
       },
     );
