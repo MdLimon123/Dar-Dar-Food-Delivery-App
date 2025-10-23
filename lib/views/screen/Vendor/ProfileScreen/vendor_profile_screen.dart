@@ -1,8 +1,11 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/vendor_bottom_menu..dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/edit_profile_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/ProfileScreen/vendor_edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class VendorProfileScreen extends StatefulWidget {
   const VendorProfileScreen({super.key});
@@ -61,11 +64,16 @@ class _VendorProfileScreenState extends State<VendorProfileScreen> {
                       ),
                     ),
 
-                    // Edit icon at end
-                    SvgPicture.asset(
-                      'assets/icons/edit.svg',
-                      height: 20,
-                      width: 20,
+                    /// Edit icon at end
+                    InkWell(
+                      onTap: (){
+                        Get.to(()=> VendorEditProfileScreen());
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/edit.svg',
+                        height: 20,
+                        width: 20,
+                      ),
                     ),
                   ],
                 ),
