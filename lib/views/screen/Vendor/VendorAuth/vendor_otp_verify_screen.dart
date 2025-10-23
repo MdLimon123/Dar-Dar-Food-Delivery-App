@@ -1,18 +1,19 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-class OtpVerifyScreen extends StatefulWidget {
-  const OtpVerifyScreen({super.key});
+class VendorOtpVerifyScreen extends StatefulWidget {
+  const VendorOtpVerifyScreen({super.key});
 
   @override
-  State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
+  State<VendorOtpVerifyScreen> createState() => _VendorOtpVerifyScreenState();
 }
 
-class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
+class _VendorOtpVerifyScreenState extends State<VendorOtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +79,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
          ),
          SizedBox(height: 18,),
          CustomButton(onTap: (){
-           Get.to(()=> OtpVerifyScreen());
+           Get.to(()=> VendorResetPasswordScreen());
          },
              text: "Verify Code")
 

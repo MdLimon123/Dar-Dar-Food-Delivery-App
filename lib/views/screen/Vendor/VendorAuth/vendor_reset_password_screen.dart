@@ -6,14 +6,14 @@ import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+class VendorResetPasswordScreen extends StatefulWidget {
+  const VendorResetPasswordScreen({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<VendorResetPasswordScreen> createState() => _VendorResetPasswordScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _VendorResetPasswordScreenState extends State<VendorResetPasswordScreen> {
 
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();

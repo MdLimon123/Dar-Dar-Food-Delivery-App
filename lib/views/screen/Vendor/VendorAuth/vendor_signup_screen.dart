@@ -3,18 +3,19 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_login_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/verify_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserSignupScreen extends StatefulWidget {
-  const UserSignupScreen({super.key});
+class VendorSignupScreen extends StatefulWidget {
+  const VendorSignupScreen({super.key});
 
   @override
-  State<UserSignupScreen> createState() => _UserSignupScreenState();
+  State<VendorSignupScreen> createState() => _VendorSignupScreenState();
 }
 
-class _UserSignupScreenState extends State<UserSignupScreen> {
+class _VendorSignupScreenState extends State<VendorSignupScreen> {
 
   final nameTextController = TextEditingController();
   final emailTextController = TextEditingController();
@@ -90,7 +91,9 @@ class _UserSignupScreenState extends State<UserSignupScreen> {
             hintText: "Confirm your password",),
           SizedBox(height: 24,),
 
-          CustomButton(onTap: (){},
+          CustomButton(onTap: (){
+            Get.to(()=> VerifyScreen());
+          },
               text: "Sign Up"),
           SizedBox(height: 12,),
           Center(

@@ -9,14 +9,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserLoginScreen extends StatefulWidget {
-  const UserLoginScreen({super.key});
+class VendorLoginScreen extends StatefulWidget {
+  const VendorLoginScreen({super.key});
 
   @override
-  State<UserLoginScreen> createState() => _UserLoginScreenState();
+  State<VendorLoginScreen> createState() => _VendorLoginScreenState();
 }
 
-class _UserLoginScreenState extends State<UserLoginScreen> {
+class _VendorLoginScreenState extends State<VendorLoginScreen> {
 
   final emailTextController = TextEditingController();
 
@@ -104,7 +104,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
           ),
           SizedBox(height: 50,),
           CustomButton(onTap: (){
-            Get.offAllNamed(AppRoutes.userHomeScreen);
+            Get.offAllNamed(AppRoutes.vendorHomeScreen);
           },
               text: "Sign in"),
           SizedBox(height: 22,),

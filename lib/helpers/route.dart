@@ -6,7 +6,11 @@ import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_scree
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/orders_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/profile_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserShopScreen/shop_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/Wallet/wallet_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/NotificationScreen/vendor_notification_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/ProfileScreen/vendor_profile_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/TransectionScreen/transection_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_login_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorHomeScreen/vendor_home_screen.dart';
 import 'package:get/get.dart';
 import '../views/screen/Splash/splash_screen.dart';
 class AppRoutes{
@@ -24,11 +28,19 @@ class AppRoutes{
   static String userOrderScreen = "/user_order_screen";
   static String userFoodScreen = "/user_food_screen";
 
+  /// vendor routing
+
+  static String vendorLoginScreen = "/vendor_login_screen";
+  static String vendorHomeScreen = "/vendor_home_screen";
+  static String vendorProfileScreen = "/vendor_profile_screen";
+  static String vendorNotificationScreen = "/vendor_notification_screen";
+  static String transectionScreen = "/transection_screen";
+
+
 
  static List<GetPage> page=[
     GetPage(name:splashScreen, page: ()=>const SplashScreen()),
     GetPage(name:userHomeScreen, page: ()=>const UserHomeScreen(),transition:Transition.noTransition),
-    GetPage(name:walletScreen, page: ()=>const WalletScreen(),transition:Transition.noTransition),
     GetPage(name:userProfileScreen, page: ()=>const UserProfileScreen(),transition: Transition.noTransition),
     GetPage(name:selectRoleScreen, page: ()=>const SelectRoleScreen(),transition: Transition.noTransition),
     GetPage(name:userLoginScreen, page: ()=>const UserLoginScreen(),transition: Transition.noTransition),
@@ -36,6 +48,11 @@ class AppRoutes{
     GetPage(name:userCartScreen, page: ()=>const CardScreen(),transition: Transition.noTransition),
     GetPage(name:userOrderScreen, page: ()=>const OrdersScreen(),transition: Transition.noTransition),
     GetPage(name:userFoodScreen, page: ()=>const FoodScreen(),transition: Transition.noTransition),
+   GetPage(name: vendorLoginScreen, page: ()=>const VendorLoginScreen(),transition: Transition.noTransition),
+   GetPage(name: vendorHomeScreen, page: ()=>const VendorHomeScreen(),transition: Transition.noTransition),
+   GetPage(name: vendorProfileScreen, page: ()=>const VendorProfileScreen(),transition: Transition.noTransition),
+   GetPage(name: vendorNotificationScreen, page: ()=>const VendorNotificationScreen(),transition: Transition.noTransition),
+   GetPage(name: transectionScreen, page: ()=>const TransectionScreen(),transition: Transition.noTransition),
 
   ];
 

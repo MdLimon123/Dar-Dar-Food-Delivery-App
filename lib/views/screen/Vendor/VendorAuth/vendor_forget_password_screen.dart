@@ -6,14 +6,14 @@ import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class VendorForgetPasswordScreen extends StatefulWidget {
+  const VendorForgetPasswordScreen({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<VendorForgetPasswordScreen> createState() => _VendorForgetPasswordScreenState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+class _VendorForgetPasswordScreenState extends State<VendorForgetPasswordScreen> {
 
   final forgotEmailController = TextEditingController();
 

@@ -8,6 +8,11 @@ class AppIcons{
   static String cart = "assets/icons/cart.svg";
   static String food = "assets/icons/food.svg";
   static String order = "assets/icons/order.svg";
+  static String profile = "assets/icons/profile.svg";
+  static String notification = "assets/icons/notification.svg";
+  static String transection = "assets/icons/transection.svg";
+
+
 
   /// image
 
