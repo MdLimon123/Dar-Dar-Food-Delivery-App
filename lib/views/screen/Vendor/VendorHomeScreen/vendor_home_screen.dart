@@ -1,5 +1,12 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/vendor_bottom_menu..dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/settings_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/terms_and_conditon_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorHomeScreen/AllSubScreen/all_products_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorHomeScreen/AllSubScreen/vendor_history_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorHomeScreen/AllSubScreen/vendor_order_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -431,7 +438,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> FaqScreen());
             },
             title: "FAQ",
             icon: "assets/icons/faq.svg",
@@ -439,7 +446,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> PrivacyPolicyScreen());
             },
             title: "Privacy Policy",
             icon: "assets/icons/privacy.svg",
@@ -447,7 +454,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> TermsAndConditionScreen());
             },
             title: "Terms & Conditions",
             icon: "assets/icons/terms.svg",
@@ -455,7 +462,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> FeedbackScreen());
             },
             title: "Feedback",
             icon: "assets/icons/feedback.svg",
@@ -471,7 +478,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> VendorHistoryScreen());
             },
             title: "History",
             icon: "assets/icons/history.svg",
@@ -481,7 +488,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=>AllProductsScreen());
             },
             title: "All Products",
             icon: "assets/icons/product.svg",
@@ -489,7 +496,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> SettingsScreen());
             },
             title: "Settings",
             icon: "assets/icons/setting.svg",
