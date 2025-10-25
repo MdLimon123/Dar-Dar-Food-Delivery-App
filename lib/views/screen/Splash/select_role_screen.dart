@@ -36,7 +36,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
             },
                 text: "Vendor"),
             SizedBox(height: 10,),
-            CustomButton(onTap: (){},
+            CustomButton(onTap: (){
+              Get.offAllNamed(AppRoutes.riderLoginScreen);
+            },
                 text: "Rider")
 
           ],
