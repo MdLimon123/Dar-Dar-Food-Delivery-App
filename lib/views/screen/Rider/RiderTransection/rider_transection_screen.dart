@@ -16,6 +16,7 @@ class _RiderTransectionScreenState extends State<RiderTransectionScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFF4F5F7),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Transections",
           style: TextStyle(
               fontSize: 18,

@@ -1,7 +1,9 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/shop_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -11,6 +13,9 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+
+  final _shopController = Get.put(ShopController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,73 +40,101 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+
+
+                Obx(() => Row(
                   children: [
-                    Text("\$98",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF89B12C)
-                    ),),
-                    SizedBox(width: 4,),
-                    Text("\$198",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFFC11415),
-                      decoration: TextDecoration.lineThrough,
-                      decorationColor: Color(0xFFC11415),
-                    ),),
-                    SizedBox(width: 10,),
-                    Text("/500gm",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF686868)
-                    ),),
-                    SizedBox(width: 50,),
-                    Container(
-                      height: 32,
-                      width: 35,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEEF6),
-                        borderRadius: BorderRadius.circular(4)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset('assets/icons/mines.svg'),
+                    /// Price
+                    Text(
+                      "\$${_shopController.totalPrice.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF89B12C),
                       ),
                     ),
-                   SizedBox(width: 8,),
+                    SizedBox(width: 4),
+                    Text(
+                      "\$${_shopController.totalOriginalPrice.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFFC11415),
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: Color(0xFFC11415),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "/500gm",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF686868),
+                      ),
+                    ),
+                    Spacer(),
+
+                    /// Decrease Button
+                    GestureDetector(
+                      onTap: _shopController.decreaseQuantity,
+                      child: Container(
+                        height: 32,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEFEEF6),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Center(
+                          child: Icon(Icons.remove, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+
+                    /// Quantity Display
                     Container(
                       height: 32,
                       width: 53,
                       decoration: BoxDecoration(
-                          color: Color(0xFFEFEEF6),
-                          borderRadius: BorderRadius.circular(4)
+                        color: Color(0xFFEFEEF6),
+                        borderRadius: BorderRadius.circular(4),
                       ),
-                   child: Center(
-                     child: Text("1",
-                     style: TextStyle(
-                       fontSize: 16,
-                       fontWeight: FontWeight.w400,
-                       color: Color(0xFF555656)
-                     ),),
-                   ),
-                    ),
-                    SizedBox(width: 8,),
-                    Container(
-                      height: 32,
-                      width: 35,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFEFEEF6),
-                          borderRadius: BorderRadius.circular(4)
+                      child: Center(
+                        child: Text(
+                          "${_shopController.quantity.value}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF555656),
+                          ),
+                        ),
                       ),
-                      child: Icon(Icons.add),
                     ),
-                    
+                    SizedBox(width: 8),
+
+                    /// Increase Button
+                    GestureDetector(
+                      onTap: _shopController.increaseQuantity,
+                      child: Container(
+                        height: 32,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEFEEF6),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Center(
+                          child: Icon(Icons.add, color: Colors.black),
+                        ),
+                      ),
+                    ),
                   ],
-                ),
+                )),
+
+
+
+
+
                 SizedBox(height: 12,),
                 Text("Fresh Strawberry",
                 style: TextStyle(

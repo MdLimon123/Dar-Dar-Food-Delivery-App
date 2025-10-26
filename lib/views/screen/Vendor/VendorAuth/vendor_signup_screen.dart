@@ -3,6 +3,7 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_login_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_otp_verify_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/verify_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

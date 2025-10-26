@@ -18,6 +18,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         centerTitle: true,
+        automaticallyImplyLeading: false,
         title: Text("Orders",
         style: TextStyle(
           color: AppColors.textColor,

@@ -113,16 +113,21 @@ class RiderNewOrderScreen extends StatelessWidget {
                   color: Color(0xFF767676)
                 ),),
                 Spacer(),
-                Container(
-                  height: 38,
-                  width: 38,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFEEFE9),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset("assets/icons/arrow.svg"),
+                InkWell(
+                  onTap: (){
+                    Get.to(()=> MapsScreen());
+                  },
+                  child: Container(
+                    height: 38,
+                    width: 38,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFEEFE9),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset("assets/icons/arrow.svg"),
+                    ),
                   ),
                 )
               ],

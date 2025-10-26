@@ -2,6 +2,7 @@ import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/user_home_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,9 @@ class _UserSignupScreenState extends State<UserSignupScreen> {
             hintText: "Confirm your password",),
           SizedBox(height: 24,),
 
-          CustomButton(onTap: (){},
+          CustomButton(onTap: (){
+            Get.to(()=> UserHomeScreen());
+          },
               text: "Sign Up"),
           SizedBox(height: 12,),
           Center(

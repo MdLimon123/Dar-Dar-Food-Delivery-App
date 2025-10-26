@@ -19,6 +19,7 @@ class _RiderProfileScreenState extends State<RiderProfileScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFF0F0F0),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Profile",
           style: TextStyle(
               fontSize: 18,

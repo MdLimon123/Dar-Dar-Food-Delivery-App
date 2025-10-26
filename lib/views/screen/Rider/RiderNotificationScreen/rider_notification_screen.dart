@@ -16,6 +16,7 @@ class _RiderNotificationScreenState extends State<RiderNotificationScreen> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Notifications",
           style: TextStyle(
               fontSize: 18,

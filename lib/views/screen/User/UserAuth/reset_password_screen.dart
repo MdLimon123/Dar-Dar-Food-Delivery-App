@@ -2,6 +2,7 @@ import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/user_login_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           hintText: "Confirm your new password",),
           SizedBox(height: 24,),
           CustomButton(onTap: (){
-            Get.to(() => VendorLoginScreen());
+            Get.to(() => UserLoginScreen());
           },
               text: "Reset Password")
 

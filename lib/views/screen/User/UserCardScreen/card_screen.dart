@@ -1,3 +1,4 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/card_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
@@ -14,6 +15,9 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
+
+  final _cardController = Get.put(CardController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,57 +124,67 @@ class _CardScreenState extends State<CardScreen> {
                             const SizedBox(height: 12),
 
                             /// Price + Quantity box
-                            Row(
-                              children: [
-                                Text(
-                                 "\$805",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF555656),
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Container(
-                                  height: 46,
-                                  width: 84,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFE6E5F1),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: const [
-                                      Text(
-                                        "-",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF555656),
-                                        ),
-                                      ),
-                                      Text(
-                                        "8",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF555656),
-                                        ),
-                                      ),
-                                      Text(
-                                        "+",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF555656),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                       Obx(()=>     Row(
+                         children: [
+                           Text(
+                             "\$${_cardController.totalPrice}",
+                             style: const TextStyle(
+                               fontWeight: FontWeight.w600,
+                               color: Color(0xFF555656),
+                               fontSize: 18,
+                             ),
+                           ),
+                           const Spacer(),
+                           Container(
+                             height: 46,
+                             width: 84,
+                             decoration: BoxDecoration(
+                               color: const Color(0xFFE6E5F1),
+                               borderRadius: BorderRadius.circular(10),
+                             ),
+                             child: Row(
+                               mainAxisAlignment:
+                               MainAxisAlignment.spaceEvenly,
+                               children:  [
+                                 InkWell(
+                                   onTap: (){
+                                     _cardController.decreaseQuantity();
+                                   },
+                                   child: Text(
+                                     "-",
+                                     style: TextStyle(
+                                       fontSize: 20,
+                                       fontWeight: FontWeight.bold,
+                                       color: Color(0xFF555656),
+                                     ),
+                                   ),
+                                 ),
+                                 Text(
+                                   _cardController.quantity.toString(),
+                                   style: TextStyle(
+                                     fontSize: 16,
+                                     fontWeight: FontWeight.w500,
+                                     color: Color(0xFF555656),
+                                   ),
+                                 ),
+                                 InkWell(
+                                   onTap: (){
+                                     _cardController.increaseQuantity();
+                                   },
+                                   child: Text(
+                                     "+",
+                                     style: TextStyle(
+                                       fontSize: 20,
+                                       fontWeight: FontWeight.bold,
+                                       color: Color(0xFF555656),
+                                     ),
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ],
+                       ),)
                           ],
                         ),
                       ),

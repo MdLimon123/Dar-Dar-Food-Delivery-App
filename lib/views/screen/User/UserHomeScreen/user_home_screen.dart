@@ -4,6 +4,7 @@ import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/LanguageScreen/language_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/Notification/notification_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_grocery_screen.dart';
@@ -347,7 +348,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
             height: 70,),
           ),
           _customListTile(
-             onTap: (){},
+             onTap: (){
+               Get.to(()=> LanguageScreen());
+             },
            title: "Language",
            icon: "assets/icons/language.svg",
            trailingIcon:  "assets/icons/arrow_right.svg"
@@ -468,72 +471,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       trailing: trailingIcon != null ? SvgPicture.asset(trailingIcon) : null,
     );}
 
-  // Widget _buildCarouselItem(Map<String, dynamic> item) {
-  //   return Container(
-  //     margin: const EdgeInsets.all(5.0),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(8),
-  //       color: item['backgroundColor'],
-  //     ),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           flex: 2,
-  //           child: Padding(
-  //             padding: const EdgeInsets.all(10.0),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 Text(
-  //                   item['title'],
-  //                   style:  TextStyle(
-  //                     color: Color(0xFFF7F7F7),
-  //                     fontSize: 30,
-  //                     fontWeight: FontWeight.w500,
-  //                   ),
-  //                 ),
-  //                 Text(
-  //                   item['subtitle'],
-  //                   style: TextStyle(
-  //                     color: Color(0xFFFEFEFE),
-  //                     fontSize: 14,
-  //                     fontWeight: FontWeight.w500,
-  //                   ),
-  //                 ),
-  //                 const SizedBox(height: 8),
-  //                 Text(
-  //                   item['description'],
-  //                   style: TextStyle(
-  //                     fontWeight: FontWeight.w400,
-  //                     color: Color(0xFFFEFEFE),
-  //                     fontSize: 10,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //
-  //         Expanded(
-  //           flex: 4,
-  //           child: Container(
-  //             decoration: BoxDecoration(
-  //               image: DecorationImage(
-  //                 image: AssetImage(item['imagePath']),
-  //                 fit: BoxFit.fill,
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
 
   Widget _buildCarouselItem(Map<String, dynamic> item) {
     return Container(
-      margin: const EdgeInsets.all(5.0),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: item['backgroundColor'],
@@ -580,13 +522,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Expanded(
             flex: 4,
-            child: AspectRatio(     // 👈 ensures image keeps proportion
+            child: AspectRatio(
               aspectRatio: 1.2,
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(item['imagePath']),
-                    fit: BoxFit.cover, // 👈 better than fill
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -598,10 +540,4 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   }
 
 }
-
-
-
-
-
-
 

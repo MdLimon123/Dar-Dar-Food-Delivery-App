@@ -1,9 +1,11 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/vendorController/vendor_profile_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class VendorEditProfileScreen extends StatefulWidget {
   const VendorEditProfileScreen({super.key});
@@ -13,6 +15,9 @@ class VendorEditProfileScreen extends StatefulWidget {
 }
 
 class _VendorEditProfileScreenState extends State<VendorEditProfileScreen> {
+  
+  final _vendorProfileController = Get.put(VendorProfileController());
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,25 +43,29 @@ class _VendorEditProfileScreenState extends State<VendorEditProfileScreen> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Container(
-                          height: 84,
-                          width: 84,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Color(0xFFE1E1E1)),
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              'assets/image/location.png',
-                              height: 55,
-                              width: 55,
+                        Obx(()=> Container(
+                            height: 84,
+                            width: 84,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(image: _vendorProfileController.vendorProfileImage.value!= null?
+                                  FileImage(_vendorProfileController.vendorProfileImage.value!):
+                              AssetImage('assets/image/location.png'),
+                              fit: BoxFit.cover),
+                              border: Border.all(color: Color(0xFFE1E1E1)),
                             ),
+
                           ),
                         ),
                         Positioned(
-                          child: SvgPicture.asset('assets/icons/camera.svg',
-                          height: 20,
-                          width: 20,),
+                          child: InkWell(
+                            onTap: (){
+                              _vendorProfileController.pickVendorProfileImage();
+                            },
+                            child: SvgPicture.asset('assets/icons/camera.svg',
+                            height: 20,
+                            width: 20,),
+                          ),
                         )
                       ],
                     ),

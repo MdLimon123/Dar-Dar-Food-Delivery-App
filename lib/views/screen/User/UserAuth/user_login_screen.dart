@@ -3,6 +3,8 @@ import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/forget_password_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/user_signup_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_forget_password_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Vendor/VendorAuth/vendor_signup_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -92,7 +94,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
               Spacer(),
               InkWell(
                 onTap: (){
-                  Get.to(()=> VendorForgetPasswordScreen());
+                  Get.to(()=> ForgetPasswordScreen());
                 },
                 child: Text("Forgot Password?",
                   style: TextStyle(
@@ -125,7 +127,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                         fontWeight: FontWeight.w400),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                      Get.to(()=>VendorSignupScreen());
+                      Get.to(()=>UserSignupScreen());
                       },
                   ),
                 ],

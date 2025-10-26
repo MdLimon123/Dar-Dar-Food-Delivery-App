@@ -1,5 +1,7 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/vendor_bottom_menu..dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/LanguageScreen/language_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
@@ -430,7 +432,9 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
               height: 70,),
           ),
           _customListTile(
-              onTap: (){},
+              onTap: (){
+                Get.to(()=> LanguageScreen());
+              },
               title: "Language",
               icon: "assets/icons/language.svg",
               trailingIcon:  "assets/icons/arrow_right.svg"
@@ -505,7 +509,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           SizedBox(height: 100,),
           InkWell(
             onTap: (){
-
+              Get.to(()=> SelectRoleScreen());
             },
             child: Container(
               width: 168,

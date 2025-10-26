@@ -1,6 +1,7 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserAuth/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
@@ -78,7 +79,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
          ),
          SizedBox(height: 18,),
          CustomButton(onTap: (){
-           Get.to(()=> OtpVerifyScreen());
+           Get.to(()=> ResetPasswordScreen());
          },
              text: "Verify Code")
 

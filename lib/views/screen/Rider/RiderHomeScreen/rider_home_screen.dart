@@ -1,11 +1,19 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/rider_bottom_menu..dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/LanguageScreen/language_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/AllSubScreen/rider_complete_order_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/AllSubScreen/rider_current_order_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/AllSubScreen/rider_new_order_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/AllSubScreen/complete_order_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/settings_screen.dart';
+import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/terms_and_conditon_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class RiderHomeScreen extends StatefulWidget {
   const RiderHomeScreen({super.key});
@@ -197,7 +205,9 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
               height: 70,),
           ),
           _customListTile(
-              onTap: (){},
+              onTap: (){
+                Get.to(()=> LanguageScreen());
+              },
               title: "Language",
               icon: "assets/icons/language.svg",
               trailingIcon:  "assets/icons/arrow_right.svg"
@@ -205,7 +215,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> FaqScreen());
             },
             title: "FAQ",
             icon: "assets/icons/faq.svg",
@@ -213,7 +223,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> PrivacyPolicyScreen());
             },
             title: "Privacy Policy",
             icon: "assets/icons/privacy.svg",
@@ -221,7 +231,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> TermsAndConditionScreen());
             },
             title: "Terms & Conditions",
             icon: "assets/icons/terms.svg",
@@ -229,7 +239,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> FeedbackScreen());
             },
             title: "Feedback",
             icon: "assets/icons/feedback.svg",
@@ -239,7 +249,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
             onTap: (){
-
+              Get.to(()=> SettingsScreen());
             },
             title: "Settings",
             icon: "assets/icons/setting.svg",
@@ -248,7 +258,7 @@ class _RiderHomeScreenState extends State<RiderHomeScreen> with TickerProviderSt
           SizedBox(height: 100,),
           InkWell(
             onTap: (){
-
+              Get.to(()=> SelectRoleScreen());
             },
             child: Container(
               width: 168,

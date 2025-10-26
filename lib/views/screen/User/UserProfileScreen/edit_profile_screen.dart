@@ -1,9 +1,11 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/user_profile_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -14,6 +16,8 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final nameTextController = TextEditingController();
+
+  final _userProfileController = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +48,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
-                        child: Container(
-                          height: 84,
-                          width: 84,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage("assets/image/dummy.jpg"),
-                              fit: BoxFit.cover,
+                        child: Obx(
+                                ()=> Container(
+                            height: 84,
+                            width: 84,
+                            decoration:  BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: _userProfileController.userProfileImage.value != null
+                                    ?  FileImage(_userProfileController.userProfileImage.value!):
+                                AssetImage("assets/image/dummy.jpg"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -79,24 +87,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   /// Edit icon (top right)
                   Positioned(
-                    top: 55,
-                    right: 135,
-                    child: Container(
-                      height: 24,
-                      width: 24,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFF656565),
-                            blurRadius: 4,
-                            offset: Offset(0, 4)
-                          )]
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: SvgPicture.asset("assets/icons/camera.svg"),
+                    top: 60,
+                    right: 130,
+                    child: InkWell(
+                      onTap: (){
+                        _userProfileController.pickUserProfileImage();
+                      },
+                      child: Container(
+                        height: 24,
+                        width: 24,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF656565),
+                              blurRadius: 4,
+                              offset: Offset(0, 4)
+                            )]
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: SvgPicture.asset("assets/icons/camera.svg"),
+                        ),
                       ),
                     ),
                   )
