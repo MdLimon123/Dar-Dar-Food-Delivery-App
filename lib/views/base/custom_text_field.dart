@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/app_colors.dart';
 import '../../utils/app_constants.dart';
@@ -20,6 +19,7 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final bool? isEmail;
   final int? maxLine;
+  final bool? readOnly;
 
   const CustomTextField(
       {super.key,
@@ -37,6 +37,7 @@ class CustomTextField extends StatefulWidget {
       this.obscure = '*',
       this.filColor,
       this.labelText,
+      this.readOnly,
       this.isPassword = false});
 
   @override
@@ -60,6 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscuringCharacter: widget.obscure!,
       maxLines:widget.maxLine,
       // validator: widget.validator,
+      readOnly: widget.readOnly ?? false,
       validator: widget.validator ??
           (value) {
             if (widget.isEmail == null) {

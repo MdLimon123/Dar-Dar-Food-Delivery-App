@@ -87,4 +87,6 @@ class _VendorOtpVerifyScreenState extends State<VendorOtpVerifyScreen> {
      ),
     );
   }
+
+
 }

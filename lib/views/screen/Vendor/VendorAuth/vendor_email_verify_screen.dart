@@ -1,4 +1,4 @@
-import 'package:dar_dar_foodd_delivery_app/controllers/userController/user_auth_controller.dart';
+import 'package:dar_dar_foodd_delivery_app/controllers/vendorController/vendor_auth_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
@@ -6,16 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-class OtpVerifyScreen extends StatefulWidget {
+class VendorEmailVerifyScreen extends StatefulWidget {
   final String email;
-  const OtpVerifyScreen({super.key, required this.email});
+  const VendorEmailVerifyScreen({super.key, required this.email});
 
   @override
-  State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
+  State<VendorEmailVerifyScreen> createState() =>
+      _VendorEmailVerifyScreenState();
 }
 
-class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
-  final _userAuthController = Get.put(UserAuthController());
+class _VendorEmailVerifyScreenState extends State<VendorEmailVerifyScreen> {
+  final _vendorAuthController = Get.put(VendorAuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               color: Color(0xFF111111),
             ),
             onCodeChanged: (String code) {},
-            onSubmit: (String verificationCode) {},
+            onSubmit: (String verificationCode) {
+              _vendorAuthController.otp.value = verificationCode;
+            },
           ),
           SizedBox(height: 10),
           Align(
@@ -86,9 +89,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
           SizedBox(height: 18),
           Obx(()=>
              CustomButton(
-              loading: _userAuthController.isVerificationLoading.value,
+              loading: _vendorAuthController.isVerifiedLoading.value,
               onTap: () {
-                _userAuthController.emailVerifedWithForget(email: widget.email);
+                _vendorAuthController.emailVerifed(email: widget.email);
               },
               text: "Verify Code",
             ),

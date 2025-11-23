@@ -1,4 +1,3 @@
-import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TabsWidgetScreen extends StatelessWidget {

@@ -4,8 +4,6 @@ import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserFoodScreen/AllSubScreen/most_popular_food_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserFoodScreen/AllSubScreen/nearby_mos_popular_restaurant_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/nearby_restaurant_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserHomeScreen/AllSubScreen/popular_meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

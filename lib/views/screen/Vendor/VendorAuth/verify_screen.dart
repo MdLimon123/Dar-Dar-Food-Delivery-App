@@ -16,51 +16,50 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-
   final _setupProfileController = Get.put(SetupProfileController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CustomAppbar(
-        title: "Verify",
-      ),
+      appBar: CustomAppbar(title: "Verify"),
 
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         children: [
-          Text("Store Info :",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF855BBB)
-          ),),
-          SizedBox(height: 24,),
-          _headingText(
-            title: "Phone Number"
+          Text(
+            "Store Info :",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF855BBB),
+            ),
           ),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: 'Enter your phone number',
-          ),
-          SizedBox(height: 24,),
-          _headingText(
-            title: "Store Location"
-          ),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: "Store Name",
-          ),
-          SizedBox(height: 24,),
+          SizedBox(height: 24),
+          _headingText(title: "Store Name"),
+          SizedBox(height: 12),
+          CustomTextField(hintText: 'Enter store name'),
+          SizedBox(height: 12),
+          _headingText(title: "Store Type"),
+          SizedBox(height: 12),
+          CustomTextField(hintText: 'Enter store type'),
+          SizedBox(height: 12),
+          _headingText(title: "Phone Number"),
+          SizedBox(height: 12),
+          CustomTextField(hintText: 'Enter your phone number'),
+          SizedBox(height: 24),
+          _headingText(title: "Store Location"),
+          SizedBox(height: 12),
+          CustomTextField(hintText: "Store Name"),
+          SizedBox(height: 24),
           _headingText(title: "Store Image"),
-          SizedBox(height: 12,),
+          SizedBox(height: 12),
 
           Obx(() {
             final file = _setupProfileController.storeImage.value;
             return InkWell(
-              onTap: (){
-                _setupProfileController.pickStoreImage( fromCamera: false);
+              onTap: () {
+                _setupProfileController.pickStoreImage(fromCamera: false);
               },
               child: Container(
                 width: double.infinity,
@@ -72,13 +71,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if(file == null)...[
-
+                    if (file == null) ...[
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: SvgPicture.asset(
                           "assets/icons/default_image.svg",
-
                         ),
                       ),
 
@@ -91,25 +88,26 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                       ),
                     ] else ...[
-                      Image.file(file,
+                      Image.file(
+                        file,
                         fit: BoxFit.cover,
                         width: double.infinity,
-                        height: 150,)
-                    ]
+                        height: 150,
+                      ),
+                    ],
                   ],
                 ),
               ),
             );
-
           }),
-          SizedBox(height: 24,),
+          SizedBox(height: 24),
           _headingText(title: "Store License"),
-          SizedBox(height: 12,),
+          SizedBox(height: 12),
           Obx(() {
             final file = _setupProfileController.licenseImage.value;
             return InkWell(
-              onTap: (){
-                _setupProfileController.pickLicenseImage( fromCamera: false);
+              onTap: () {
+                _setupProfileController.pickLicenseImage(fromCamera: false);
               },
               child: Container(
                 width: double.infinity,
@@ -121,13 +119,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if(file == null)...[
-
+                    if (file == null) ...[
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: SvgPicture.asset(
                           "assets/icons/default_image.svg",
-
                         ),
                       ),
 
@@ -140,70 +136,71 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                       ),
                     ] else ...[
-                      Image.file(file,
+                      Image.file(
+                        file,
                         fit: BoxFit.cover,
                         width: double.infinity,
-                        height: 150,)
-                    ]
+                        height: 150,
+                      ),
+                    ],
                   ],
                 ),
               ),
             );
-
           }),
-          SizedBox(height: 24,),
-          Text("Bank Info :",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF855BBB)
-          ),),
-          SizedBox(height: 12,),
-          Text("Bank Account Name",
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textColor
-          ),),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: "Account Name",
+          SizedBox(height: 24),
+          Text(
+            "Bank Info :",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF855BBB),
+            ),
           ),
-          SizedBox(height: 24,),
+          SizedBox(height: 12),
+          Text(
+            "Bank Account Name",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textColor,
+            ),
+          ),
+          SizedBox(height: 12),
+          CustomTextField(hintText: "Account Name"),
+          SizedBox(height: 24),
           _headingText(title: "Bank Account Number"),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: "Account Number"),
-          SizedBox(height: 24,),
+          SizedBox(height: 12),
+          CustomTextField(hintText: "Account Number"),
+          SizedBox(height: 24),
           _headingText(title: "Bank Name"),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: "Bank Name"),
-          SizedBox(height: 24,),
+          SizedBox(height: 12),
+          CustomTextField(hintText: "Bank Name"),
+          SizedBox(height: 24),
           _headingText(title: "Payment Method Preferences"),
-          SizedBox(height: 12,),
-          CustomTextField(
-            hintText: "Payment Method Preferences"),
-          SizedBox(height: 24,),
+          SizedBox(height: 12),
+          CustomTextField(hintText: "Payment Method Preferences"),
+          SizedBox(height: 24),
 
-          CustomButton(onTap: (){
-
-            Get.offAllNamed(AppRoutes.vendorHomeScreen);
-          },
-              text: "Submit")
-
+          CustomButton(
+            onTap: () {
+              Get.offAllNamed(AppRoutes.vendorHomeScreen);
+            },
+            text: "Submit",
+          ),
         ],
       ),
-
     );
   }
 
   Text _headingText({required String title}) {
-    return Text(title,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: AppColors.textColor
-        ),);
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: AppColors.textColor,
+      ),
+    );
   }
 }

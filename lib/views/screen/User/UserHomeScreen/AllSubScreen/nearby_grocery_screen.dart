@@ -1,5 +1,4 @@
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
-import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';

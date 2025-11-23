@@ -4,7 +4,6 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_button.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserCardScreen/AllSubScreen/edit_address_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserCardScreen/AllSubScreen/payment_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CheckOutScreen extends StatefulWidget {

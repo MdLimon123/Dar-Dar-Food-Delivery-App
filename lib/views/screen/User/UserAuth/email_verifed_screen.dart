@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-class OtpVerifyScreen extends StatefulWidget {
+class EmailVerifedScreen extends StatefulWidget {
   final String email;
-  const OtpVerifyScreen({super.key, required this.email});
+  const EmailVerifedScreen({super.key, required this.email});
 
   @override
-  State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
+  State<EmailVerifedScreen> createState() => _EmailVerifedScreenState();
 }
 
-class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
+class _EmailVerifedScreenState extends State<EmailVerifedScreen> {
   final _userAuthController = Get.put(UserAuthController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CustomAppbar(title: "Verify OTP"),
+      appBar: CustomAppbar(title: "Email Verify"),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
@@ -67,7 +67,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               color: Color(0xFF111111),
             ),
             onCodeChanged: (String code) {},
-            onSubmit: (String verificationCode) {},
+            onSubmit: (String verificationCode) {
+              _userAuthController.otp.value = verificationCode;
+            },
           ),
           SizedBox(height: 10),
           Align(
@@ -86,9 +88,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
           SizedBox(height: 18),
           Obx(()=>
              CustomButton(
-              loading: _userAuthController.isVerificationLoading.value,
+              loading: _userAuthController.isVerifiedLoading.value,
               onTap: () {
-                _userAuthController.emailVerifedWithForget(email: widget.email);
+                _userAuthController.emailVerifed(email: widget.email);
               },
               text: "Verify Code",
             ),

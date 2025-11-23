@@ -2,7 +2,6 @@ import 'package:dar_dar_foodd_delivery_app/controllers/userController/shop_contr
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {

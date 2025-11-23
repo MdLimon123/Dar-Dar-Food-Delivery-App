@@ -1,15 +1,15 @@
+import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomLoading extends StatelessWidget {
   const CustomLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
-      height: 20.h,
-      width: 20.h,
-      child: const CircularProgressIndicator(color: Colors.white,),
+    return SizedBox(
+      height: 30,
+      width: 30,
+      child: CircularProgressIndicator(color: AppColors.primaryColor),
     );
   }
 }

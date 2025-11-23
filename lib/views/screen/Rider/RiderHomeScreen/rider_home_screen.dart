@@ -5,7 +5,6 @@ import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/Al
 import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/AllSubScreen/rider_current_order_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Rider/RiderHomeScreen/AllSubScreen/rider_new_order_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserOrdersScreen/AllSubScreen/complete_order_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
