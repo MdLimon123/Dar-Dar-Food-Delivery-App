@@ -5,7 +5,6 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 
 class PopularMealScreen extends StatefulWidget {
   final int id;
@@ -16,50 +15,8 @@ class PopularMealScreen extends StatefulWidget {
 }
 
 class _PopularMealScreenState extends State<PopularMealScreen> {
-  final List<Map<String, dynamic>> mealItems = [
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-  ];
+
+ 
 
   final _homeController = Get.put(HomeController());
 

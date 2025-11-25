@@ -1,16 +1,21 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/card_controller.dart';
+import 'package:dar_dar_foodd_delivery_app/models/User/cart_item.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MealCard extends StatelessWidget {
   final ProductData productModel;
   final IconData icon;
-  const MealCard({
+  MealCard({
     super.key,
     required this.productModel,
     this.icon = Icons.favorite_border,
   });
+
+  final _cartController = Get.put(CardController());
 
   @override
   Widget build(BuildContext context) {
@@ -119,17 +124,38 @@ class MealCard extends StatelessWidget {
                     //     decorationColor: Color(0xFFFF2600),
                     //   ),
                     // ),
+                    InkWell(
+                      onTap: () {
+                        _cartController.addToCart(
+                          CartItem(
+                            id: productModel.id ?? 0,
+                            name: productModel.name ?? "",
+                            image:
+                                "${ApiConstant.imageBaseUrl}${productModel.image1}",
+                            price:
+                                double.tryParse(productModel.price ?? "0") ?? 0,
+                            quantity:
+                                int.tryParse("1") ??
+                                1, 
+                            gm:
+                                productModel.quantity ??
+                                '', // যদি gm থাকে, নাহলে খালি string
+                          ),
+                        );
 
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF35E24),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 20,
+                        Get.snackbar("Success", "Item added to cart");
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF35E24),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],

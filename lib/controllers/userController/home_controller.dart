@@ -1,5 +1,6 @@
 import 'package:dar_dar_foodd_delivery_app/models/User/all_grocery_model.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/all_nearby_restaurant_model.dart';
+import 'package:dar_dar_foodd_delivery_app/models/User/banner_model.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/category_model.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_client.dart';
@@ -17,6 +18,8 @@ class HomeController extends GetxController {
   RxList<ShopData> allGroceryDataList = <ShopData>[].obs;
   RxList<ProductData> propularAllFoodList = <ProductData>[].obs;
   RxList<VendorSubcategory> vendorCategoryList = <VendorSubcategory>[].obs;
+
+  RxList<BannerData> bannerList = <BannerData>[].obs;
 
   /// all category
   Future<void> fetchCategory() async {
@@ -101,5 +104,19 @@ class HomeController extends GetxController {
       print("Something we want wronge =======> ${response.body}");
     }
     isPopularMealLoading(false);
+  }
+
+  Future<void> fetchAllBanner() async {
+    isLaoding(true);
+
+    final response = await ApiClient.getData("/api/v1/auth/banners/");
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final List<dynamic> data = response.body['data'];
+
+      bannerList.value = data.map((e) => BannerData.fromJson(e)).toList();
+    } else {
+      print("Something we want wrong ==========> ${response.body}");
+    }
+    isLaoding(false);
   }
 }

@@ -4,6 +4,7 @@ import 'package:dar_dar_foodd_delivery_app/controllers/userController/home_contr
 import 'package:dar_dar_foodd_delivery_app/controllers/userController/user_profile_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/helpers/prefs_helper.dart';
 import 'package:dar_dar_foodd_delivery_app/helpers/route.dart';
+import 'package:dar_dar_foodd_delivery_app/models/User/banner_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_constants.dart';
@@ -71,6 +72,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       _homeController.fetchAllNearbyRestaurant();
       _homeController.fetchAllGrocery();
       _profileController.fetchUserInfo();
+      _homeController.fetchAllBanner();
     });
     super.initState();
   }
@@ -100,10 +102,12 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
                   /// Carousel slider
                   CarouselSlider.builder(
-                    itemCount: carouselItems.length,
+                    itemCount: _homeController.bannerList.length,
                     itemBuilder:
                         (BuildContext context, int index, int realIndex) {
-                          return _buildCarouselItem(carouselItems[index]);
+                          return _buildCarouselItem(
+                            _homeController.bannerList[index],
+                          );
                         },
                     options: CarouselOptions(
                       height: 150.0,
@@ -118,12 +122,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       },
                     ),
                   ),
+     
 
                   /// Page indicator
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: carouselItems.map((url) {
-                      int index = carouselItems.indexOf(url);
+                    children: _homeController.bannerList.map((url) {
+                      int index = _homeController.bannerList.indexOf(url);
                       return Container(
                         width: 12.0,
                         height: 12.0,
@@ -557,68 +562,16 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
   }
 
-  Widget _buildCarouselItem(Map<String, dynamic> item) {
+  Widget _buildCarouselItem(BannerData banner) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+      width: double.infinity,
+      height: 180,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: item['backgroundColor'],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    item['title'],
-                    style: const TextStyle(
-                      color: Color(0xFFF7F7F7),
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text(
-                    item['subtitle'],
-                    style: const TextStyle(
-                      color: Color(0xFFFEFEFE),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    item['description'],
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFFFEFEFE),
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: AspectRatio(
-              aspectRatio: 1.2,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(item['imagePath']),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(
+          image: NetworkImage("${ApiConstant.imageBaseUrl}${banner.image}"),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

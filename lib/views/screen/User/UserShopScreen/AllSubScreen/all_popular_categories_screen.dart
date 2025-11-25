@@ -1,5 +1,4 @@
 import 'package:dar_dar_foodd_delivery_app/controllers/userController/home_controller.dart';
-import 'package:dar_dar_foodd_delivery_app/controllers/userController/shop_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_appbar.dart';

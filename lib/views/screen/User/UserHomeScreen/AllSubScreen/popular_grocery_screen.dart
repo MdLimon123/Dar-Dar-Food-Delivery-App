@@ -28,50 +28,7 @@ class _PopularGroceryScreenState extends State<PopularGroceryScreen> {
   final _shopController = Get.put(ShopController());
   final _homeController = Get.put(HomeController());
 
-  final List<Map<String, dynamic>> mealItems = [
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-  ];
+ 
   int _currentIndex = 0;
 
   @override
