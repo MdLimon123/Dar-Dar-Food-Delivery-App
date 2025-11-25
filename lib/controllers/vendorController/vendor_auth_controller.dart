@@ -158,4 +158,8 @@ class VendorAuthController extends GetxController {
     }
     isVerifiedLoading(false);
   }
+
+
+
+
 }

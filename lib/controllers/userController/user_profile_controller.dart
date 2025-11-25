@@ -26,6 +26,8 @@ class UserProfileController extends GetxController {
     }
   }
 
+
+
   Future<void> fetchUserInfo() async {
     isLoading(true);
 
@@ -44,18 +46,21 @@ class UserProfileController extends GetxController {
     required String imagePath,
     required String fullName,
     required String phoneNumber,
-    required String currentAddres,
+    required String currentAddress,
   }) async {
     updateProfileLoading(true);
     List<MultipartBody> multipartBody = [];
+
     if (imagePath.isNotEmpty) {
-      multipartBody.add(MultipartBody('image', File(imagePath)));
+      if (imagePath.isNotEmpty) {
+        multipartBody.add(MultipartBody('image', File(imagePath)));
+      }
     }
 
     Map<String, String> fromData = {
       "full_name": fullName,
       "phone_number": phoneNumber,
-      "address": currentAddres,
+      "address": currentAddress,
     };
 
     final response = await ApiClient.patchMultipartData(
@@ -64,17 +69,17 @@ class UserProfileController extends GetxController {
       multipartBody: multipartBody,
     );
 
-    print("respons body ===============> ${response.body}");
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      showCustomSnackBar("Profile Update Successfully", isError: false);
-      Get.back();
+    print("Response body: ${response.body}");
+    print("Status code: ${response.statusCode}");
 
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      showCustomSnackBar("Profile updated successfully.", isError: false);
+      Get.back();
       fetchUserInfo();
     } else {
-      showCustomSnackBar("Something we want wrong", isError: true);
-      print("respone body ===============> ${response.body}");
-      print("respone status ===============> ${response.statusCode}");
+      showCustomSnackBar("Something we wnat wrong", isError: true);
     }
+
     updateProfileLoading(false);
   }
 }

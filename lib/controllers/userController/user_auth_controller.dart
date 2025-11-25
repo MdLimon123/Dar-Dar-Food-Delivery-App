@@ -43,6 +43,8 @@ class UserAuthController extends GetxController {
   var locationSuggestions = <String>[].obs;
   var selectedCoordinates = <double>[].obs;
 
+  
+
   @override
   void onInit() {
     super.onInit();

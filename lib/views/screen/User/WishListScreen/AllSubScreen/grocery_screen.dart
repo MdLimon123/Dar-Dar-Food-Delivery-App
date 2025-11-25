@@ -1,5 +1,7 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/home_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/_custom_popular_grocery_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GroceryScreen extends StatefulWidget {
   const GroceryScreen({super.key});
@@ -9,55 +11,11 @@ class GroceryScreen extends StatefulWidget {
 }
 
 class _GroceryScreenState extends State<GroceryScreen> {
-  final List<Map<String, dynamic>> mealItems = [
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-    {
-      'name': 'Strawberry',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/strawberry.png',
-    },
-    {
-      'name': 'Avocado',
-      'vendor': '( 30 gm)',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/avocado.png',
-    },
-
-  ];
+  final _homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    return  GridView.builder(
-      itemCount: mealItems.length,
+    return GridView.builder(
+      itemCount: _homeController.propularAllFoodList.length,
       padding: EdgeInsets.symmetric(horizontal: 20),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -66,8 +24,8 @@ class _GroceryScreenState extends State<GroceryScreen> {
         childAspectRatio: 0.80,
       ),
       itemBuilder: (context, index) {
-        return PopularGroceryCard(item: mealItems[index],
-        icon: Icons.favorite,);
+        final data = _homeController.propularAllFoodList[index];
+        return PopularGroceryCard(productData: data, icon: Icons.favorite);
       },
     );
   }

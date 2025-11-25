@@ -24,7 +24,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   void initState() {
-    _userProfileController.fetchUserInfo();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _userProfileController.fetchUserInfo();
+    });
     super.initState();
   }
 
@@ -113,10 +115,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         onTap: () {
                           Get.to(
                             () => EditProfileScreen(
-                              image: '${ApiConstant.imageBaseUrl}${data.image}',
-                              fullName: '${data.fullName}',
-                              currentAddress: '${data.currentAddress}',
-                              phoneNumber: '${data.phoneNumber}',
+                           
                             ),
                           );
                         },

@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dar_dar_foodd_delivery_app/controllers/data_controller.dart';
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/home_controller.dart';
+import 'package:dar_dar_foodd_delivery_app/controllers/userController/user_profile_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/helpers/prefs_helper.dart';
 import 'package:dar_dar_foodd_delivery_app/helpers/route.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
@@ -8,6 +10,7 @@ import 'package:dar_dar_foodd_delivery_app/utils/app_constants.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/_custom_food_card.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_grocery_card.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_loading.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_network_image.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/custom_text_field.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/LanguageScreen/language_screen.dart';
@@ -38,6 +41,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
   final _dataController = Get.put(DataController());
 
+  final _homeController = Get.put(HomeController());
+  final _profileController = Get.put(UserProfileController());
+
   int _currentIndex = 0;
 
   final List<Map<String, dynamic>> carouselItems = [
@@ -59,7 +65,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
   @override
   void initState() {
-    _dataController.getData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _dataController.getData();
+      _homeController.fetchCategory();
+      _homeController.fetchAllNearbyRestaurant();
+      _homeController.fetchAllGrocery();
+      _profileController.fetchUserInfo();
+    });
     super.initState();
   }
 
@@ -69,185 +81,222 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       backgroundColor: const Color(0xFFF4F4F5),
       appBar: _customAppbar(),
       endDrawer: _customDrawer(),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        children: [
-          CustomTextField(
-            controller: searchTextController,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: SvgPicture.asset("assets/icons/search.svg"),
-            ),
-            hintText: "Search here....",
-          ),
-          SizedBox(height: 24),
 
-          /// Carousel slider
-          CarouselSlider.builder(
-            itemCount: carouselItems.length,
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              return _buildCarouselItem(carouselItems[index]);
-            },
-            options: CarouselOptions(
-              height: 150.0,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              aspectRatio: 16 / 9,
-              viewportFraction: 0.85,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
-          ),
-
-          /// Page indicator
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: carouselItems.map((url) {
-              int index = carouselItems.indexOf(url);
-              return Container(
-                width: 12.0,
-                height: 12.0,
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: _currentIndex == index
-                      ? Color(0xFF89B12C)
-                      : Color(0xFFDEECBF),
-                ),
-              );
-            }).toList(),
-          ),
-          SizedBox(height: 24),
-
-          /// Categories
-          SizedBox(
-            height: 97,
-            child: ListView.separated(
-              separatorBuilder: (context, index) {
-                return SizedBox(width: 12);
-              },
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Container(
-                  width: 86,
-                  height: 97,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFDEECBF),
-                    borderRadius: BorderRadius.circular(8),
+      body: Obx(
+        () => _homeController.isLaoding.value
+            ? Center(child: CustomLoading())
+            : ListView(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                children: [
+                  CustomTextField(
+                    controller: searchTextController,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: SvgPicture.asset("assets/icons/search.svg"),
+                    ),
+                    hintText: "Search here....",
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  SizedBox(height: 24),
+
+                  /// Carousel slider
+                  CarouselSlider.builder(
+                    itemCount: carouselItems.length,
+                    itemBuilder:
+                        (BuildContext context, int index, int realIndex) {
+                          return _buildCarouselItem(carouselItems[index]);
+                        },
+                    options: CarouselOptions(
+                      height: 150.0,
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.85,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                    ),
+                  ),
+
+                  /// Page indicator
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    children: carouselItems.map((url) {
+                      int index = carouselItems.indexOf(url);
+                      return Container(
+                        width: 12.0,
+                        height: 12.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentIndex == index
+                              ? Color(0xFF89B12C)
+                              : Color(0xFFDEECBF),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: 24),
+
+                  /// Categories
+                  SizedBox(
+                    height: 97,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return SizedBox(width: 12);
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _homeController.allCategoryList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final category = _homeController.allCategoryList[index];
+                        return Container(
+                          width: 86,
+                          height: 97,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDEECBF),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                "${ApiConstant.imageBaseUrl}${category.image}",
+                                height: 57,
+                                width: 57,
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                category.name,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.textColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/image/pizza.png',
-                        height: 57,
-                        width: 57,
-                      ),
-                      SizedBox(height: 2),
                       Text(
-                        'Pizza',
+                        "Near By Restaurant",
                         style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                           color: AppColors.textColor,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => NearbyRestaurantScreen());
+                        },
+                        child: Text(
+                          "View All",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFF35E24),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Near By Restaurant",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textColor,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => NearbyRestaurantScreen());
-                },
-                child: Text(
-                  "View All",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFFF35E24),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
+                  SizedBox(height: 10),
 
-          /// near by restaurant
-          SizedBox(
-            height: 260,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              separatorBuilder: (_, index) => SizedBox(width: 12),
-              itemBuilder: (context, index) {
-                return SizedBox(width: 265, child: FoodCard());
-              },
-            ),
-          ),
-          SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Near By Grocery",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textColor,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => NearbyGroceryScreen());
-                },
-                child: Text(
-                  "View All",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFFF35E24),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
+                  Obx(() {
+                    if (_homeController.allNearbyRestaurantList.isEmpty) {
+                      return SizedBox(
+                        height: 260,
+                        child: Center(child: Text("No restaurants found")),
+                      );
+                    }
 
-          /// Near By Grocery
-          SizedBox(
-            height: 260,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              separatorBuilder: (_, index) => SizedBox(width: 12),
-              itemBuilder: (context, index) {
-                return SizedBox(width: 265, child: GroceryCard());
-              },
-            ),
-          ),
-        ],
+                    return SizedBox(
+                      height: 260,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            _homeController.allNearbyRestaurantList.length,
+                        separatorBuilder: (_, index) => SizedBox(width: 12),
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 265,
+                            child: FoodCard(
+                              allNearbyRestaurantModel: _homeController
+                                  .allNearbyRestaurantList[index],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }),
+
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Near By Grocery",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textColor,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => NearbyGroceryScreen());
+                        },
+                        child: Text(
+                          "View All",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFF35E24),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+
+                  /// Near By Grocery
+                  SizedBox(
+                    height: 260,
+                    child: Obx(() {
+                      if (_homeController.allGroceryDataList.isEmpty) {
+                        return Center(child: Text("No shops available"));
+                      }
+
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _homeController.allGroceryDataList.length,
+                        separatorBuilder: (_, index) => SizedBox(width: 12),
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 265,
+                            child: GroceryCard(
+                              shopData:
+                                  _homeController.allGroceryDataList[index],
+                            ),
+                          );
+                        },
+                      );
+                    }),
+                  ),
+                ],
+              ),
       ),
+
       bottomNavigationBar: UserBottomMenu(0),
     );
   }
@@ -264,7 +313,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           Obx(
             () => CustomNetworkImage(
               imageUrl:
-                  "${ApiConstant.imageBaseUrl}${_dataController.profileImage.value}",
+                  "${ApiConstant.imageBaseUrl}${_profileController.userInfo.value.image}",
               height: 44,
               boxShape: BoxShape.circle,
               width: 44,
@@ -281,7 +330,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               children: [
                 Obx(
                   () => Text(
-                    _dataController.fullName.value,
+                    _profileController.userInfo.value.fullName ?? "",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -302,7 +351,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     Obx(
                       () => Expanded(
                         child: Text(
-                          _dataController.currentLocation.value,
+                          _profileController.userInfo.value.currentAddress ??
+                              "",
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -358,6 +408,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ],
     );
   }
+
+  /// google api key
+  /// AIzaSyDNgiiIj_2_L6IHDymfGvVzOA9Jz-iFeA4
 
   Drawer _customDrawer() {
     return Drawer(

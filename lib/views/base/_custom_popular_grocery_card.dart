@@ -1,12 +1,15 @@
+import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
+import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserShopScreen/AllSubScreen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class PopularGroceryCard extends StatelessWidget {
-  final Map<String, dynamic> item;
+  final ProductData productData;
   final IconData icon;
-  const PopularGroceryCard({super.key, required this.item,this.icon = Icons.favorite_border});
+  const PopularGroceryCard({super.key, required this.productData,this.icon = Icons.favorite_border});
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +40,8 @@ class PopularGroceryCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
-                  child: Image.asset(
-                    item['imagePath'],
+                  child: Image.network(
+                   "${ApiConstant.imageBaseUrl}${productData.image1}",
                     height: 120,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -72,7 +75,7 @@ class PopularGroceryCard extends StatelessWidget {
                 children: [
 
                   Text(
-                    item['name'],
+                    productData.name ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style:  TextStyle(
@@ -90,13 +93,13 @@ class PopularGroceryCard extends StatelessWidget {
                         width: 18,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            image: DecorationImage(image: AssetImage('assets/image/burger2.png'),
+                            image: DecorationImage(image: NetworkImage("${ApiConstant.imageBaseUrl}${productData.shopImage}"),
                                 fit: BoxFit.cover)
                         ),
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        item['vendor'],
+                        "${productData.quantity} gm",
                         style: TextStyle(
                             fontSize: 12,
                             color: AppColors.textColor,
@@ -114,7 +117,7 @@ class PopularGroceryCard extends StatelessWidget {
 
 
                       Text(
-                        '\$${item['price'].toStringAsFixed(2)}',
+                        '${productData.price}',
                         style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -122,16 +125,16 @@ class PopularGroceryCard extends StatelessWidget {
                         ),
                       ),
 
-                      Text(
-                        '\$${item['oldPrice'].toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFFFF2600),
-                          fontWeight: FontWeight.w300,
-                          decoration: TextDecoration.lineThrough,
-                          decorationColor: Color(0xFFFF2600),
-                        ),
-                      ),
+                      // Text(
+                      //   '\$${item['oldPrice'].toStringAsFixed(2)}',
+                      //   style: const TextStyle(
+                      //     fontSize: 12,
+                      //     color: Color(0xFFFF2600),
+                      //     fontWeight: FontWeight.w300,
+                      //     decoration: TextDecoration.lineThrough,
+                      //     decorationColor: Color(0xFFFF2600),
+                      //   ),
+                      // ),
 
                       InkWell(
                         onTap: (){

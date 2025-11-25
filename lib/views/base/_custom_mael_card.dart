@@ -1,37 +1,36 @@
+import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
+import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
-  final Map<String, dynamic> item;
+  final ProductData productModel;
   final IconData icon;
-  const MealCard({super.key, required this.item, this.icon = Icons.favorite_border});
+  const MealCard({
+    super.key,
+    required this.productModel,
+    this.icon = Icons.favorite_border,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFFFEFEFE),
-            blurRadius: 1,
-          ),
-        ],
-
+        boxShadow: [BoxShadow(color: Color(0xFFFEFEFE), blurRadius: 1)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-
           Stack(
             children: [
               ClipRRect(
-                borderRadius:  BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8),
                   topRight: Radius.circular(8),
                 ),
-                child: Image.asset(
-                  item['imagePath'],
+                child: Image.network(
+                  "${ApiConstant.imageBaseUrl}${productModel.image1}",
                   height: 120,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -47,28 +46,22 @@ class MealCard extends StatelessWidget {
                     color: Color(0xFFF7F7F7),
                     shape: BoxShape.circle,
                   ),
-                  child:  Icon(
-                    icon,
-                    color: Color(0xFF89B12C),
-                    size: 18,
-                  ),
+                  child: Icon(icon, color: Color(0xFF89B12C), size: 18),
                 ),
               ),
             ],
           ),
-
 
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Text(
-                  item['name'],
+                  productModel.name ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: AppColors.textColor,
@@ -82,49 +75,50 @@ class MealCard extends StatelessWidget {
                       height: 18,
                       width: 18,
                       decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(image: AssetImage('assets/image/burger2.png'),
-                              fit: BoxFit.cover)
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            '${ApiConstant.imageBaseUrl}${productModel.image1}',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      item['vendor'],
+                      productModel.description ?? '',
                       style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.w400
+                        fontSize: 12,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
 
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
-
                     Text(
-                      '\$${item['price'].toStringAsFixed(2)}',
+                      '${productModel.currency} ${productModel.price}',
                       style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF96C330)
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF96C330),
                       ),
                     ),
 
-                    Text(
-                      '\$${item['oldPrice'].toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFFFF2600),
-                        fontWeight: FontWeight.w300,
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Color(0xFFFF2600),
-                      ),
-                    ),
+                    // Text(
+                    //   '\$${item['oldPrice'].toStringAsFixed(2)}',
+                    //   style: const TextStyle(
+                    //     fontSize: 12,
+                    //     color: Color(0xFFFF2600),
+                    //     fontWeight: FontWeight.w300,
+                    //     decoration: TextDecoration.lineThrough,
+                    //     decorationColor: Color(0xFFFF2600),
+                    //   ),
+                    // ),
 
                     Container(
                       padding: const EdgeInsets.all(5),
