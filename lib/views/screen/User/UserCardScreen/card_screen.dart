@@ -75,7 +75,6 @@ class _CardScreenState extends State<CardScreen> {
                       itemBuilder: (context, index) {
                         final data = _cardController.cartItems[index];
 
-                   
                         return Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -85,14 +84,18 @@ class _CardScreenState extends State<CardScreen> {
                           child: Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              /// 🗑️ Delete icon (top-right)
                               Positioned(
                                 right: 0,
                                 top: 0,
-                                child: SvgPicture.asset(
-                                  "assets/icons/delete.svg",
-                                  height: 20,
-                                  width: 20,
+                                child: InkWell(
+                                  onTap: () {
+                                    _cardController.removeItem(index);
+                                  },
+                                  child: SvgPicture.asset(
+                                    "assets/icons/delete.svg",
+                                    height: 20,
+                                    width: 20,
+                                  ),
                                 ),
                               ),
 
@@ -135,11 +138,9 @@ class _CardScreenState extends State<CardScreen> {
                                         ),
                                         const SizedBox(height: 12),
 
-                               
                                         Obx(
                                           () => Row(
                                             children: [
-                                            
                                               Text(
                                                 "\$${(data.price * data.quantity.value).toStringAsFixed(2)}",
                                                 style: const TextStyle(
@@ -302,7 +303,7 @@ class _CardScreenState extends State<CardScreen> {
                         ),
                         Obx(
                           () => Text(
-                            "\$${(_cardController.totalPrice + 120).toStringAsFixed(2)}", 
+                            "\$${(_cardController.totalPrice + 120).toStringAsFixed(2)}",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -322,7 +323,16 @@ class _CardScreenState extends State<CardScreen> {
                     ),
                     child: CustomButton(
                       onTap: () {
-                        Get.to(() => CheckOutScreen());
+                        Get.to(
+                          () => CheckOutScreen(
+                            subTotal: _cardController.totalPrice
+                                .toStringAsFixed(2),
+                            deliveryFee: "120",
+                            total: (_cardController.totalPrice + 120)
+                            
+                                .toStringAsFixed(2),
+                          ),
+                        );
                       },
                       text: "Check Out",
                     ),

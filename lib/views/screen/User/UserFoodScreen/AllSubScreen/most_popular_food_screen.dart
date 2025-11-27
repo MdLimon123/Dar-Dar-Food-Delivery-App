@@ -28,51 +28,6 @@ class MostPopularFoodScreen extends StatefulWidget {
 }
 
 class _MostPopularFoodScreenState extends State<MostPopularFoodScreen> {
-  final List<Map<String, dynamic>> mealItems = [
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-    {
-      'name': 'Cheesy Pan Pizza',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 22.00,
-      'imagePath': 'assets/image/burger2.png',
-    },
-    {
-      'name': 'Strawberry Cake',
-      'vendor': 'Testy treat',
-      'price': 25.00,
-      'oldPrice': 35.00,
-      'imagePath': 'assets/image/cake.png',
-    },
-  ];
-
   final _homeController = Get.put(HomeController());
 
   @override
@@ -216,7 +171,7 @@ class _MostPopularFoodScreenState extends State<MostPopularFoodScreen> {
                     ],
                   ),
                   SizedBox(height: 57),
-                  
+
                   SizedBox(
                     height: 97,
                     child: ListView.separated(
@@ -262,8 +217,7 @@ class _MostPopularFoodScreenState extends State<MostPopularFoodScreen> {
                       },
                     ),
                   ),
-                
-                
+
                   SizedBox(height: 34),
                   Row(
                     children: [
@@ -305,6 +259,10 @@ class _MostPopularFoodScreenState extends State<MostPopularFoodScreen> {
                       return MealCard(
                         productModel:
                             _homeController.propularAllFoodList[index],
+                        onTap: () {
+                          _homeController.wishFovariteItem(id: _homeController
+                              .propularAllFoodList[index].id!);
+                        },
                       );
                     },
                   ),

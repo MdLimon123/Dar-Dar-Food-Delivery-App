@@ -191,6 +191,9 @@ class _ShopScreenState extends State<ShopScreen> {
                           width: double.infinity,
                           height: 260,
                           child: GroceryCard(
+                            onTap: () {
+                              // Handle tap event here
+                            },
                             shopData: _homeController.allGroceryDataList[index],
                           ),
                         ),

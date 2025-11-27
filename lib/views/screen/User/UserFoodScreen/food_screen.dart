@@ -152,6 +152,9 @@ class _FoodScreenState extends State<FoodScreen> {
                           child: SizedBox(
                             width: 265,
                             child: FoodCard(
+                              onTap: () {
+                                  
+                                },
                               allNearbyRestaurantModel: _homeController
                                   .allNearbyRestaurantList[index],
                             ),

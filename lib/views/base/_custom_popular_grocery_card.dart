@@ -3,17 +3,18 @@ import 'package:dar_dar_foodd_delivery_app/models/User/cart_item.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserShopScreen/AllSubScreen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularGroceryCard extends StatelessWidget {
   final ProductData productData;
   final IconData icon;
+  final Function() onTap;
   PopularGroceryCard({
     super.key,
     required this.productData,
     this.icon = Icons.favorite_border,
+    required this.onTap,
   });
 
   final _cartController = Get.put(CardController());
@@ -22,7 +23,7 @@ class PopularGroceryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => ProductDetailsScreen());
+        //Get.to(() => ProductDetailsScreen());
       },
       child: Container(
         decoration: BoxDecoration(
@@ -50,13 +51,16 @@ class PopularGroceryCard extends StatelessWidget {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF7F7F7),
-                      shape: BoxShape.circle,
+                  child: InkWell(
+                    onTap: onTap,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF7F7F7),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(icon, color: Color(0xFF89B12C), size: 18),
                     ),
-                    child: Icon(icon, color: Color(0xFF89B12C), size: 18),
                   ),
                 ),
               ],

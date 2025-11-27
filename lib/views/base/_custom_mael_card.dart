@@ -9,17 +9,21 @@ import 'package:get/get.dart';
 class MealCard extends StatelessWidget {
   final ProductData productModel;
   final IconData icon;
+  final  Function()? onTap;
   MealCard({
     super.key,
     required this.productModel,
     this.icon = Icons.favorite_border,
+   required this.onTap,
   });
 
   final _cartController = Get.put(CardController());
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    
+    Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         boxShadow: [BoxShadow(color: Color(0xFFFEFEFE), blurRadius: 1)],
@@ -45,13 +49,16 @@ class MealCard extends StatelessWidget {
               Positioned(
                 top: 8,
                 right: 8,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF7F7F7),
-                    shape: BoxShape.circle,
+                child: InkWell(
+                  onTap: onTap,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF7F7F7),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, color: Color(0xFF89B12C), size: 18),
                   ),
-                  child: Icon(icon, color: Color(0xFF89B12C), size: 18),
                 ),
               ),
             ],
@@ -139,7 +146,7 @@ class MealCard extends StatelessWidget {
                                 1, 
                             gm:
                                 productModel.quantity ??
-                                '', // যদি gm থাকে, নাহলে খালি string
+                                '', 
                           ),
                         );
 
@@ -166,5 +173,7 @@ class MealCard extends StatelessWidget {
         ],
       ),
     );
+ 
+ 
   }
 }

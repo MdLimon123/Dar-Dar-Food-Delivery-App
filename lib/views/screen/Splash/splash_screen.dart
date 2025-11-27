@@ -18,18 +18,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3), (){
-
-    _loadUserRoleAndNavigate();
+    Future.delayed(Duration(seconds: 3), () {
+      _loadUserRoleAndNavigate();
     });
-
 
     super.initState();
   }
 
   Future<void> _loadUserRoleAndNavigate() async {
     await _dataController.getData();
-    print("user id=============> ${_dataController.id.value}");
+    await _dataController.getVendorData();
+    print("user id=============> ${_dataController.vendorId.value}");
     print("user role=============> ${_dataController.role.value}");
 
     var token = await PrefsHelper.getString(AppConstants.bearerToken);

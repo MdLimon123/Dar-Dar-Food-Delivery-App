@@ -122,7 +122,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       },
                     ),
                   ),
-     
 
                   /// Page indicator
                   Row(
@@ -236,6 +235,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                           return SizedBox(
                             width: 265,
                             child: FoodCard(
+                              onTap: () {},
                               allNearbyRestaurantModel: _homeController
                                   .allNearbyRestaurantList[index],
                             ),
@@ -290,6 +290,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                           return SizedBox(
                             width: 265,
                             child: GroceryCard(
+                              onTap: () {
+                                // Handle tap event here
+                              },
                               shopData:
                                   _homeController.allGroceryDataList[index],
                             ),
@@ -504,9 +507,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           ),
           Divider(color: Color(0xFFE1E1E1)),
           SizedBox(height: 100),
+
           InkWell(
             onTap: () async {
               await PrefsHelper.remove(AppConstants.bearerToken);
+              await PrefsHelper.remove("id");
+              await PrefsHelper.remove("role");
+
               Get.offAllNamed(AppRoutes.selectRoleScreen);
             },
             child: Container(

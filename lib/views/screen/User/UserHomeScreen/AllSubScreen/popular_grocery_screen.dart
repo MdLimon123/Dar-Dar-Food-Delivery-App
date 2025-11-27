@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dar_dar_foodd_delivery_app/controllers/userController/home_controller.dart';
 import 'package:dar_dar_foodd_delivery_app/controllers/userController/shop_controller.dart';
-import 'package:dar_dar_foodd_delivery_app/models/User/shop_banner_model';
+import 'package:dar_dar_foodd_delivery_app/models/User/shop_banner_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/_custom_popular_grocery_card.dart';
@@ -247,7 +247,11 @@ class _PopularGroceryScreenState extends State<PopularGroceryScreen> {
                         ),
                     itemBuilder: (context, index) {
                       final data = _homeController.propularAllFoodList[index];
-                      return PopularGroceryCard(productData: data,);
+                      return PopularGroceryCard(productData: data,
+                      onTap: () {
+                        _homeController.wishFovariteItem(id:  data.id ?? 0);
+                      },
+                      );
                     },
                   ),
                 ],

@@ -63,7 +63,11 @@ class _AllPopularFruitsScreenState extends State<AllPopularFruitsScreen> {
                         ),
                     itemBuilder: (context, index) {
                       final data = _homeController.propularAllFoodList[index];
-                      return PopularGroceryCard(productData: data);
+                      return PopularGroceryCard(productData: data,
+                      onTap: () {
+                        _homeController.wishFovariteItem(id:  data.id ?? 0);
+                      },
+                      );
                     },
                   ),
                 ],

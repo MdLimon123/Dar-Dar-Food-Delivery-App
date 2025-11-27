@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class UserAuthController extends GetxController {
+  
   var isLoading = false.obs;
   var isVerifiedLoading = false.obs;
 
@@ -29,10 +30,9 @@ class UserAuthController extends GetxController {
   var isForgetVerify = "".obs;
 
   var isResetLoading = false.obs;
-    final _dataController = Get.put(DataController());
+  final _dataController = Get.put(DataController());
 
   var otp = "".obs;
-
 
   final emailTextController = TextEditingController();
   final passwordController = TextEditingController();
@@ -43,7 +43,7 @@ class UserAuthController extends GetxController {
   var locationSuggestions = <String>[].obs;
   var selectedCoordinates = <double>[].obs;
 
-  
+
 
   @override
   void onInit() {
@@ -51,7 +51,6 @@ class UserAuthController extends GetxController {
 
     _loadRememberedCredentials();
   }
-
 
   Future<void> login({required String email, required String password}) async {
     isLoginLoading(true);
@@ -160,7 +159,7 @@ class UserAuthController extends GetxController {
             jsonData['candidates'].isNotEmpty) {
           final geometry = jsonData['candidates'][0]['geometry'];
           final location = geometry['location'];
-          selectedCoordinates.value = [location['lng'], location['lat']];
+          selectedCoordinates.value = [location['lat'], location['lng']];
         } else {
           selectedCoordinates.clear();
           print('No location found');
@@ -194,7 +193,7 @@ class UserAuthController extends GetxController {
       "phone_number": phone,
       "password": password,
       "confirm_password": confirmPassword,
-      "current_location": "23.77754265037622, 90.39683198560394",
+      "current_location": selectedCoordinates.join(", "),
       "role": "USER",
     };
     var headers = {'Content-Type': 'application/json'};
@@ -251,8 +250,6 @@ class UserAuthController extends GetxController {
     isVerifiedLoading(false);
   }
 
-
-
   Future<void> forgetPassword({required String email}) async {
     isForgetLoading(true);
 
@@ -301,6 +298,8 @@ class UserAuthController extends GetxController {
     }
     isVerificationLoading(false);
   }
+
+
 
   Future<void> resetPassword({
     required String newPassword,

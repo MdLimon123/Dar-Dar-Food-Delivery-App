@@ -69,6 +69,9 @@ class _NearbyGroceryScreenState extends State<NearbyGroceryScreen> {
                             child: SizedBox(
                               width: 265,
                               child: GroceryCard(
+                                onTap: () {
+                                 
+                                },
                                 shopData:
                                     _homeController.allGroceryDataList[index],
                               ),

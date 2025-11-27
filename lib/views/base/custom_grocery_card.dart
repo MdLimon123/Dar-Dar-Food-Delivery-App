@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 
 class GroceryCard extends StatelessWidget {
   final ShopData shopData;
+    final Color? iconColor;
+  final Color? backgroundColor;
+  final Function() onTap;
 
-  const GroceryCard({super.key, required this.shopData});
+  const GroceryCard({super.key, required this.shopData, this.iconColor, this.backgroundColor,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -50,22 +53,25 @@ class GroceryCard extends StatelessWidget {
               Positioned(
                 top: 15,
                 right: 15,
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF7F7F7),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFF89B12C),
-                    size: 24,
+                child: InkWell(
+                  onTap: onTap,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: iconColor ?? Colors.transparent,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: backgroundColor ?? Colors.transparent,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.favorite_border,
+                      color: Color(0xFF89B12C),
+                      size: 24,
+                    ),
                   ),
                 ),
               ),

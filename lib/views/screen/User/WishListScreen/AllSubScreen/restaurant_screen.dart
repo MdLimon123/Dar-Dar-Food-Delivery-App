@@ -15,7 +15,8 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return
+     ListView.separated(
       padding: EdgeInsets.symmetric(horizontal: 20),
       shrinkWrap: true,
       itemCount: _homeController.allNearbyRestaurantList.length,
@@ -23,10 +24,13 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {},
-          child: SizedBox(width: 265, child: FoodCard(icon: Icons.favorite,
+          child: SizedBox(width: 265, child: FoodCard(
+          onTap: () {},
+            icon: Icons.favorite,
           allNearbyRestaurantModel: _homeController.allNearbyRestaurantList[index],)),
         );
       },
     );
+  
   }
 }

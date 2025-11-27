@@ -80,6 +80,9 @@ class _NearbyMostPopularRestaurantScreenState
                             child: SizedBox(
                               width: 265,
                               child: FoodCard(
+                                onTap: () {
+                                  
+                                },
                                 allNearbyRestaurantModel: _homeController
                                     .allNearbyRestaurantList[index],
                               ),

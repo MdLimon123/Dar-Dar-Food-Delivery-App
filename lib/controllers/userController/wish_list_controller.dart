@@ -1,30 +1,33 @@
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/AllSubScreen/grocery_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/AllSubScreen/product_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/User/WishListScreen/AllSubScreen/restaurant_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:dar_dar_foodd_delivery_app/models/User/wishlist_model.dart';
+import 'package:dar_dar_foodd_delivery_app/services/api_client.dart';
 import 'package:get/get.dart';
 
-class WishListController extends GetxController{
+class WishListController extends GetxController {
+  var isLoading = false.obs;
 
-  var tabIndex = 0.obs;
+  RxList<WishlistProduct> wishListProduct = <WishlistProduct>[].obs;
 
-  List<String> tabList = [
-    'Restaurant',
-    'Grocery',
-    'Products'
-  ].obs;
+Future<void> fetchWishListProduct() async {
+  isLoading(true);
 
-  List<Widget> tabSections = [
-    RestaurantScreen(),
-    GroceryScreen(),
-    ProductScreen()
-  ].obs;
+  final response = await ApiClient.getData("/api/v1/wishlist/");
 
-  bool isTabSelected(int index){
-    if(tabIndex == index){
-      return true;
-    }
-    return false;
+  if (response.statusCode == 200) {
+    List<dynamic> data = response.body['data'];
+
+  
+    final List<WishlistItem> items = data
+        .map((item) => WishlistItem.fromJson(item))
+        .toList();
+
+    
+    wishListProduct.value = items.map((e) => e.product).toList();
+
+  } else {
+    print("Error fetching wishlist products: ${response.statusCode}");
   }
+
+  isLoading(false);
+}
 
 }

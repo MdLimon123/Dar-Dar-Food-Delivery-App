@@ -27,6 +27,7 @@ class CommonData {
   static const accountName = "accountName";
   static const accountNumber = "accountNumber";
   static const branch = "branch";
+  static const isApproved = "isApproved";
 }
 
 

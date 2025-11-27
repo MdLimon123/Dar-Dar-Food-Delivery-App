@@ -12,16 +12,13 @@ class DataController extends GetxController {
   var currentLocation = "".obs;
   var phone = "".obs;
 
-
-
-/// vendor data
-
+  /// vendor data
 
   var vendorId = "".obs;
   var vendorName = "".obs;
   var vendorEmail = "".obs;
   var vendorImage = "".obs;
-  var vendorRole = "".obs;
+
 
   var vendorCurrentLocation = "".obs;
   var currentAddress = "".obs;
@@ -38,8 +35,7 @@ class DataController extends GetxController {
   var accountName = "".obs;
   var accountNumber = "".obs;
   var branch = "".obs;
-
-
+  var isApproved = false.obs;
 
   late SharedPreferences preferences;
 
@@ -80,8 +76,6 @@ class DataController extends GetxController {
     preferences.setString(CommonData.address, currentLocationD);
   }
 
-
-
   /// SET VENDOR DATA
 
   Future<void> setVendorData({
@@ -89,7 +83,7 @@ class DataController extends GetxController {
     required String vendorNameD,
     required String vendorEmailD,
     required String vendorImageD,
-    required String vendorRoleD,
+    required String roleD,
     required String currentLocationD,
     required String currentAddressD,
     required String shopNameD,
@@ -102,6 +96,7 @@ class DataController extends GetxController {
     required String accountNameD,
     required String accountNumberD,
     required String branchD,
+    required bool isApprovedD,
   }) async {
     preferences = await SharedPreferences.getInstance();
 
@@ -109,7 +104,7 @@ class DataController extends GetxController {
     vendorName.value = vendorNameD;
     vendorEmail.value = vendorEmailD;
     vendorImage.value = vendorImageD;
-    vendorRole.value = vendorRoleD;
+    role.value = roleD;
 
     currentLocation.value = currentLocationD;
     currentAddress.value = currentAddressD;
@@ -126,13 +121,14 @@ class DataController extends GetxController {
     accountName.value = accountNameD;
     accountNumber.value = accountNumberD;
     branch.value = branchD;
+    isApproved.value = isApprovedD;
 
     // save in SharedPreferences
     preferences.setString(CommonData.vendorId, vendorIdD);
     preferences.setString(CommonData.vendorName, vendorNameD);
     preferences.setString(CommonData.vendorEmail, vendorEmailD);
     preferences.setString(CommonData.vendorImage, vendorImageD);
-    preferences.setString(CommonData.vendorRole, vendorRoleD);
+    preferences.setString(CommonData.role, roleD);
 
     preferences.setString(CommonData.currentLocation, currentLocationD);
     preferences.setString(CommonData.currentAddress, currentAddressD);
@@ -149,9 +145,8 @@ class DataController extends GetxController {
     preferences.setString(CommonData.accountName, accountNameD);
     preferences.setString(CommonData.accountNumber, accountNumberD);
     preferences.setString(CommonData.branch, branchD);
+    preferences.setBool(CommonData.isApproved, isApprovedD);
   }
-
-
 
   /// GET VENDOR DATA
 
@@ -162,10 +157,13 @@ class DataController extends GetxController {
     vendorName.value = preferences.getString(CommonData.vendorName) ?? "";
     vendorEmail.value = preferences.getString(CommonData.vendorEmail) ?? "";
     vendorImage.value = preferences.getString(CommonData.vendorImage) ?? "";
-    vendorRole.value = preferences.getString(CommonData.vendorRole) ?? "";
+    role.value = preferences.getString(CommonData.role) ?? "";
+    isApproved.value = preferences.getBool(CommonData.isApproved) ?? false;
 
-    currentLocation.value = preferences.getString(CommonData.currentLocation) ?? "";
-    currentAddress.value = preferences.getString(CommonData.currentAddress) ?? "";
+    currentLocation.value =
+        preferences.getString(CommonData.currentLocation) ?? "";
+    currentAddress.value =
+        preferences.getString(CommonData.currentAddress) ?? "";
 
     shopName.value = preferences.getString(CommonData.shopName) ?? "";
     shopImage.value = preferences.getString(CommonData.shopImage) ?? "";
@@ -180,7 +178,6 @@ class DataController extends GetxController {
     accountNumber.value = preferences.getString(CommonData.accountNumber) ?? "";
     branch.value = preferences.getString(CommonData.branch) ?? "";
   }
-
 
   updateProfileImage(String profileImageD) async {
     preferences = await SharedPreferences.getInstance();

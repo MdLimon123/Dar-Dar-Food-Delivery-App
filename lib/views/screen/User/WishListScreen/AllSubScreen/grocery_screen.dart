@@ -25,7 +25,11 @@ class _GroceryScreenState extends State<GroceryScreen> {
       ),
       itemBuilder: (context, index) {
         final data = _homeController.propularAllFoodList[index];
-        return PopularGroceryCard(productData: data, icon: Icons.favorite);
+        return PopularGroceryCard(productData: data, icon: Icons.favorite,
+        onTap: () {
+          _homeController.wishFovariteItem(id:  data.id ?? 0);
+        },
+        );
       },
     );
   }

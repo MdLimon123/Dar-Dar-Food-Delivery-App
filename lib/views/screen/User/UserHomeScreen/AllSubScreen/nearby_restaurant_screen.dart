@@ -68,6 +68,8 @@ class _NearbyRestaurantScreenState extends State<NearbyRestaurantScreen> {
                             child: SizedBox(
                               width: 265,
                               child: FoodCard(
+                                onTap: () {
+                                },
                                 allNearbyRestaurantModel: _homeController
                                     .allNearbyRestaurantList[index],
                               ),

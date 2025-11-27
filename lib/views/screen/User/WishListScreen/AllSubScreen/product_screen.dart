@@ -32,7 +32,11 @@ class _ProductScreenState extends State<ProductScreen> {
         childAspectRatio: 0.80,
       ),
       itemBuilder: (context, index) {
-        return MealCard(productModel: _homeController.propularAllFoodList[index],);
+        return MealCard(productModel: _homeController.propularAllFoodList[index],
+        onTap: () {
+          _homeController.wishFovariteItem(
+              id: _homeController.propularAllFoodList[index].id!);
+        },);
       },
     );
   }

@@ -1,7 +1,12 @@
+import 'package:dar_dar_foodd_delivery_app/controllers/vendorController/vendor_profile_controller.dart';
+import 'package:dar_dar_foodd_delivery_app/helpers/prefs_helper.dart';
+import 'package:dar_dar_foodd_delivery_app/helpers/route.dart';
+import 'package:dar_dar_foodd_delivery_app/services/api_constant.dart';
 import 'package:dar_dar_foodd_delivery_app/utils/app_colors.dart';
+import 'package:dar_dar_foodd_delivery_app/utils/app_constants.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_network_image.dart';
 import 'package:dar_dar_foodd_delivery_app/views/base/vendor_bottom_menu..dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/LanguageScreen/language_screen.dart';
-import 'package:dar_dar_foodd_delivery_app/views/screen/Splash/select_role_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/faq_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/feedback_screen.dart';
 import 'package:dar_dar_foodd_delivery_app/views/screen/User/UserProfileScreen/AllSubScreen/privacy_policy_screen.dart';
@@ -22,20 +27,18 @@ class VendorHomeScreen extends StatefulWidget {
   State<VendorHomeScreen> createState() => _VendorHomeScreenState();
 }
 
-class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProviderStateMixin{
-
+class _VendorHomeScreenState extends State<VendorHomeScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
-
-  bool isApproved = false;
+  final _vendorProfileController = Get.put(VendorProfileController());
 
   @override
   void initState() {
-    setState(() {
-      isApproved = true;
-
-    });
     _tabController = TabController(length: 2, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _vendorProfileController.fetchVendorInfo();
+    });
     super.initState();
   }
 
@@ -53,32 +56,33 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
       'address': '2464 Royal Ln. Mesa',
       'fee': '\$30',
       'image':
-      'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=60',
+          'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=60',
     };
   });
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF0F0F0),
       appBar: _customAppbar(),
       endDrawer: _customDrawer(),
-      body: isApproved ?
-      SafeArea(
+      body: SafeArea(
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
 
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height
+              minHeight: MediaQuery.of(context).size.height,
             ),
             child: IntrinsicHeight(
               child: Column(
                 children: [
                   /// Top summary cards
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 14,
+                    ),
                     child: Row(
                       children: [
                         _summaryCard('Total Order', '120', widthFactor: 0.45),
@@ -108,7 +112,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                                 color: Colors.black.withValues(alpha: 0.06),
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
-                              )
+                              ),
                             ],
                           ),
                           child: Padding(
@@ -117,9 +121,10 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                               children: [
                                 /// Heading row
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                     Text(
+                                    Text(
                                       'EARNING',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
@@ -128,111 +133,161 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                                       ),
                                     ),
 
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Container(
-                                              height: 28,
-                                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                                              child: DropdownButtonHideUnderline(
-                                                child: DropdownButton<String>(
-                                                  value: "Last Week",
-                                                  icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF8526F2)),
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF8526F2),
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                  dropdownColor: Colors.white,
-                                                  items: const [
-                                                    DropdownMenuItem(value: "Last Week", child: Text("Last Week",
-                                                       style: TextStyle( color: Color(0xFF8526F2),
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w400))),
-                                                    DropdownMenuItem(value: "Last Month", child: Text("Last Month",
-                                                        style: TextStyle( color: Color(0xFF8526F2),
-                                                            fontSize: 12,
-                                                            fontWeight: FontWeight.w400))),
-                                                    DropdownMenuItem(value: "Last Year", child: Text("Last Year",
-                                                        style: TextStyle( color: Color(0xFF8526F2),
-                                                            fontSize: 12,
-                                                            fontWeight: FontWeight.w400))),
-                                                  ],
-                                                  onChanged: (value) {
-                                                    // Handle dropdown change
-                                                  },
-                                                ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          height: 28,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                          ),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton<String>(
+                                              value: "Last Week",
+                                              icon: const Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: Color(0xFF8526F2),
                                               ),
+                                              style: const TextStyle(
+                                                color: Color(0xFF8526F2),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              dropdownColor: Colors.white,
+                                              items: const [
+                                                DropdownMenuItem(
+                                                  value: "Last Week",
+                                                  child: Text(
+                                                    "Last Week",
+                                                    style: TextStyle(
+                                                      color: Color(0xFF8526F2),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: "Last Month",
+                                                  child: Text(
+                                                    "Last Month",
+                                                    style: TextStyle(
+                                                      color: Color(0xFF8526F2),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: "Last Year",
+                                                  child: Text(
+                                                    "Last Year",
+                                                    style: TextStyle(
+                                                      color: Color(0xFF8526F2),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              onChanged: (value) {
+                                                // Handle dropdown change
+                                              },
                                             ),
-                                          ],
+                                          ),
                                         ),
-
-
-
-
+                                      ],
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 6),
+
                                 /// Chart area
                                 SizedBox(
                                   height: 160,
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(horizontal: 6.0),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6.0,
+                                    ),
                                     child: LineChart(sampleLineChartData()),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
+
                                 /// dates row (small)
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 6.0),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6.0,
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children:  [
-                                      Text('16\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
-                                      Text('17\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
-                                      Text('18\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
-                                      Text('19\nMAR',
-                                          style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        color: AppColors.textColor,
-                                      ), textAlign: TextAlign.center),
-                                      Text('20\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
-                                      Text('21\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
-                                      Text('22\nMAR',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 12,
-                                            color: AppColors.textColor,
-                                          ), textAlign: TextAlign.center),
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '16\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '17\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '18\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '19\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '20\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '21\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        '22\nMAR',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: AppColors.textColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -258,29 +313,35 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                                     color: Color(0xFFFF9B6A),
                                     width: 4,
                                   ),
-                                  insets: EdgeInsets.symmetric(horizontal: 60.0),
+                                  insets: EdgeInsets.symmetric(
+                                    horizontal: 60.0,
+                                  ),
                                 ),
                                 indicatorSize: TabBarIndicatorSize.tab,
                                 labelStyle: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                tabs:  [
+                                tabs: [
                                   Tab(
-                                    child: Text('New Orders (2)',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.textColor,
-                                      fontSize: 14
-                                    ),),
-                                  ),
-                                  Tab(
-                                    child: Text('Picked Order (97)',
-                                    style: TextStyle(
+                                    child: Text(
+                                      'New Orders (2)',
+                                      style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.textColor,
-                                        fontSize: 14
-                                    ),),
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  Tab(
+                                    child: Text(
+                                      'Picked Order (97)',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.textColor,
+                                        fontSize: 14,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -291,54 +352,22 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                               height: MediaQuery.of(context).size.height,
                               child: TabBarView(
                                 controller: _tabController,
-                                children: [
-                                  _ordersList(),
-                                  _pickOrder(),
-                                ],
+                                children: [_ordersList(), _pickOrder()],
                               ),
                             ),
                           ],
-                        )
-
-
-
+                        ),
                       ],
                     ),
                   ),
-
                 ],
               ),
             ),
           ),
         ),
-      )
-          :
-      _customNotApprovedBody(),
+      ),
+
       bottomNavigationBar: VendorBottomMenu(0),
-    );
-  }
-
-  Widget _customNotApprovedBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-         Center(
-           child: Image.asset("assets/image/stopwatch.png",
-             height: 58,
-             width: 58,),),
-      SizedBox(height: 24,),
-
-      Center(
-        child: Text("Your documents have been correctly submitted to the admin.Wait for admin approval. Admin will send you a notification if any documents are required.",
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Color(0xFF686868)
-        ),
-        textAlign: TextAlign.center,),
-      )
-      ],
     );
   }
 
@@ -347,53 +376,56 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
       backgroundColor: Colors.white,
       elevation: 0,
       automaticallyImplyLeading: false,
-      title: Row(
-        children: [
-          /// Profile photo
-          Container(
-            height: 24,
-            width: 24,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle),
-            child: SvgPicture.asset('assets/icons/location_fill.svg'),
-          ),
-          const SizedBox(width: 8),
-
-          /// Name + Location
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Restaurant Location",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF3A3A35),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 2),
-
-
-                    Text(
-                      "San Fernando Warehouse",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF3A3A35),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    )
-              ],
+      title: Obx(() => 
+        Row(
+          children: [
+            /// Profile photo
+            
+            CustomNetworkImage(
+              imageUrl:
+                  "${ApiConstant.imageBaseUrl}${_vendorProfileController.vendorInfoModel.value.image}",
+              height: 40,
+              width: 40,
+              boxShape: BoxShape.circle,
             ),
-          ),
-        ],
+            
+             
+            const SizedBox(width: 8),
+        
+            /// Name + Location
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Restaurant Location",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF3A3A35),
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 2),
+        
+                  Text(
+                    _vendorProfileController.vendorInfoModel.value.currentAddress ?? "",
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF3A3A35),
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
 
       actions: [
-
         const SizedBox(width: 8),
 
         Builder(
@@ -409,11 +441,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                 shape: BoxShape.circle,
                 color: Color(0xFFEDEDED),
               ),
-              child: const Icon(
-                Icons.menu,
-                color: Colors.black87,
-                size: 20,
-              ),
+              child: const Icon(Icons.menu, color: Colors.black87, size: 20),
             ),
           ),
         ),
@@ -425,55 +453,58 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children:  [
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(color: AppColors.textColor),
-            child: Image.asset("assets/image/app_logo.png",width: 91,
-              height: 70,),
+            child: Image.asset(
+              "assets/image/app_logo.png",
+              width: 91,
+              height: 70,
+            ),
           ),
           _customListTile(
-              onTap: (){
-                Get.to(()=> LanguageScreen());
-              },
-              title: "Language",
-              icon: "assets/icons/language.svg",
-              trailingIcon:  "assets/icons/arrow_right.svg"
+            onTap: () {
+              Get.to(() => LanguageScreen());
+            },
+            title: "Language",
+            icon: "assets/icons/language.svg",
+            trailingIcon: "assets/icons/arrow_right.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> FaqScreen());
+            onTap: () {
+              Get.to(() => FaqScreen());
             },
             title: "FAQ",
             icon: "assets/icons/faq.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> PrivacyPolicyScreen());
+            onTap: () {
+              Get.to(() => PrivacyPolicyScreen());
             },
             title: "Privacy Policy",
             icon: "assets/icons/privacy.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> TermsAndConditionScreen());
+            onTap: () {
+              Get.to(() => TermsAndConditionScreen());
             },
             title: "Terms & Conditions",
             icon: "assets/icons/terms.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> FeedbackScreen());
+            onTap: () {
+              Get.to(() => FeedbackScreen());
             },
             title: "Feedback",
             icon: "assets/icons/feedback.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
+            onTap: () {
               Get.to(() => VendorOrderScreen());
             },
             title: "Orders",
@@ -481,35 +512,40 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> VendorHistoryScreen());
+            onTap: () {
+              Get.to(() => VendorHistoryScreen());
             },
             title: "History",
             icon: "assets/icons/history.svg",
           ),
 
-
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=>AllProductsScreen());
+            onTap: () {
+              Get.to(() => AllProductsScreen());
             },
             title: "All Products",
             icon: "assets/icons/product.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
           _customListTile(
-            onTap: (){
-              Get.to(()=> SettingsScreen());
+            onTap: () {
+              Get.to(() => SettingsScreen());
             },
             title: "Settings",
             icon: "assets/icons/setting.svg",
           ),
           Divider(color: Color(0xFFE1E1E1)),
-          SizedBox(height: 100,),
+          SizedBox(height: 100),
           InkWell(
-            onTap: (){
-              Get.to(()=> SelectRoleScreen());
+            onTap: () async{
+               await PrefsHelper.remove(AppConstants.bearerToken);
+               
+              await PrefsHelper.remove("id");
+              await PrefsHelper.remove("role");
+
+              Get.offAllNamed(AppRoutes.selectRoleScreen);
+              
             },
             child: Container(
               width: 168,
@@ -517,33 +553,38 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
               margin: EdgeInsets.only(left: 28, right: 50, bottom: 50),
               height: 54,
               decoration: BoxDecoration(
-                  color: Color(0xFF89B12C),
-                  borderRadius: BorderRadius.circular(4)
+                color: Color(0xFF89B12C),
+                borderRadius: BorderRadius.circular(4),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset('assets/icons/logout.svg'),
-                  SizedBox(width: 8,),
-                  Text('Logout',
+                  SizedBox(width: 8),
+                  Text(
+                    'Logout',
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white
-                    ),)
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
-
-
+          ),
         ],
       ),
     );
   }
 
-  Widget _customListTile({required String title, required String icon, String? trailingIcon, required Function()? onTap,}) {
+  Widget _customListTile({
+    required String title,
+    required String icon,
+    String? trailingIcon,
+    required Function()? onTap,
+  }) {
     return ListTile(
       onTap: onTap,
       leading: SvgPicture.asset(icon),
@@ -556,8 +597,8 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
         ),
       ),
       trailing: trailingIcon != null ? SvgPicture.asset(trailingIcon) : null,
-    );}
-
+    );
+  }
 
   Widget _summaryCard(String title, String value, {double widthFactor = 0.4}) {
     return Expanded(
@@ -570,19 +611,28 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
         ),
         child: Row(
           children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-              Text(title,
-                  style:  TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF5C5C5C))),
-              const SizedBox(height: 6),
-              Text(value,
-                  style:  TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w500,
-                  color: AppColors.textColor)),
-            ]),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF5C5C5C),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textColor,
+                  ),
+                ),
+              ],
+            ),
             const Spacer(),
             Container(
               height: 30,
@@ -610,9 +660,11 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
       child: const Center(
         child: Text(
           'All',
-          style: TextStyle(color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w400),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     );
@@ -640,8 +692,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
         color: Color(0xFFFEFEFE),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 5)
+          BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 5),
         ],
       ),
       child: Column(
@@ -667,38 +718,52 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                     children: [
                       Text(
                         item['title'] ?? '',
-                        style:  TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textColor,
-                            fontSize: 14),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.textColor,
+                          fontSize: 14,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                           Text('Quantity: ',
-                              style: TextStyle(color: Color(0xFF5C5C5C),
+                          Text(
+                            'Quantity: ',
+                            style: TextStyle(
+                              color: Color(0xFF5C5C5C),
                               fontSize: 12,
-                              fontWeight: FontWeight.w500)),
-                          Text(item['quantity'] ?? '',
-                              style: TextStyle(color: Color(0xFF5C5C5C),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500))
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            item['quantity'] ?? '',
+                            style: TextStyle(
+                              color: Color(0xFF5C5C5C),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          const Text('Price: ',
-                              style: TextStyle(
-                                color: Color(0xFF96C330),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              )),
-                          Text(item['price'] ?? '',
-                              style: const TextStyle(
-                                color: Color(0xFF96C330),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,))
+                          const Text(
+                            'Price: ',
+                            style: TextStyle(
+                              color: Color(0xFF96C330),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            item['price'] ?? '',
+                            style: const TextStyle(
+                              color: Color(0xFF96C330),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -708,55 +773,65 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
             ),
           ),
 
-
-
           /// address row
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
-
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: Color(0xFFE7FFFB),
-                      borderRadius: BorderRadius.circular(5),),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                     child: Row(
                       children: [
                         SvgPicture.asset("assets/icons/location.svg"),
                         const SizedBox(width: 6),
                         Expanded(
-                            child: Text(item['address'] ?? '',
-                                style: const TextStyle(
-                                  color: Color(0xFF70B9B7),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ))),
+                          child: Text(
+                            item['address'] ?? '',
+                            style: const TextStyle(
+                              color: Color(0xFF70B9B7),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
 
                 const SizedBox(width: 6),
-             Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: Color(0xFFFEEFE9),
-                    borderRadius: BorderRadius.circular(5),),
-               child: Row(
-                 children: [
-                   SvgPicture.asset("assets/icons/bike.svg"),
-                   const SizedBox(width: 6),
-                   Text('Delivery Fee: ${item['fee']}',
-                       style:  TextStyle(
-                         fontSize: 12,
-                         fontWeight: FontWeight.w500,
-                         color: Color(0xFFF35E24)
-                       )),
-                 ],
-               ),
-             )
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset("assets/icons/bike.svg"),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Delivery Fee: ${item['fee']}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFF35E24),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -766,7 +841,11 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
           /// Accept / Cancel buttons
           Padding(
             padding: const EdgeInsets.only(
-                left: 12, right: 12, bottom: 12, top: 4),
+              left: 12,
+              right: 12,
+              bottom: 12,
+              top: 4,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -779,12 +858,14 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child:  Text('Accept',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFFFAFAFA),
-                    ),),
+                    child: Text(
+                      'Accept',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFFAFAFA),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -798,17 +879,19 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child:  Text('Cancel',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFFFAFAFA),
-                    ),),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFFAFAFA),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -824,22 +907,22 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
         final item = orders[index];
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
-          child:  _pickCardOrder(item),
+          child: _pickCardOrder(item),
         );
       },
     );
   }
+
   Widget _pickCardOrder(Map<String, String> item) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-          color: Color(0xFFFEFEFE),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03),
-                blurRadius: 5)
-          ],
-        ),
+      decoration: BoxDecoration(
+        color: Color(0xFFFEFEFE),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 5),
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -855,74 +938,91 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(width: 14,),
-              Text("Total 05 Items",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textColor
-              ),)
+              SizedBox(width: 14),
+              Text(
+                "Total 05 Items",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textColor,
+                ),
+              ),
             ],
           ),
-          SizedBox(height: 10,),
-         Row(
-           children: [
-             Text("Quantity: 01",
-               style: TextStyle(
-                   fontSize: 12,
-                   fontWeight: FontWeight.w400,
-                   color: Color(0xFF5C5C5C)
-               ),),
-             SizedBox(width: 8,),
-             Text("Price: \$400",
-             style: TextStyle(
-               fontSize: 14,
-               fontWeight: FontWeight.w400,
-               color: Color(0xFF96C330)
-             ),),
-             SizedBox(width: 8,),
-             Text("Time: 2 hr",
-             style: TextStyle(
-               fontSize: 12,
-               fontWeight: FontWeight.w400,
-               color: Color(0xFF5C5C5C)
-             ),)
-           ],
-         ),
-          SizedBox(height: 10,),
-          Text("Pick Up Location : 2464 Royal Ln. Mesa ",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textColor
-          ),),
-          SizedBox(height: 10,),
-          Text("Delivery Location : : 2464 Royal Ln. Mesa ",
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text(
+                "Quantity: 01",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF5C5C5C),
+                ),
+              ),
+              SizedBox(width: 8),
+              Text(
+                "Price: \$400",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF96C330),
+                ),
+              ),
+              SizedBox(width: 8),
+              Text(
+                "Time: 2 hr",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF5C5C5C),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Pick Up Location : 2464 Royal Ln. Mesa ",
             style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: AppColors.textColor
-            ),),
-          SizedBox(height: 10,),
-          Text("Pick Up Time : 07:13 pm",
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textColor
-          ),),
-          SizedBox(height: 10,),
-          Text("Delivery Time : 07:13 pm",
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textColor,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Delivery Location : : 2464 Royal Ln. Mesa ",
             style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: AppColors.textColor
-            ),),
-          SizedBox(height: 24,),
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textColor,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Pick Up Time : 07:13 pm",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textColor,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Delivery Time : 07:13 pm",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textColor,
+            ),
+          ),
+          SizedBox(height: 24),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: Color(0xFFFEEFE9),
-              borderRadius: BorderRadius.circular(8),),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Container(
@@ -930,27 +1030,33 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                   width: 48,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: DecorationImage(image: AssetImage('assets/image/dummy.jpg'))
+                    image: DecorationImage(
+                      image: AssetImage('assets/image/dummy.jpg'),
+                    ),
                   ),
                 ),
-                SizedBox(width: 12,),
+                SizedBox(width: 12),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Cameron Williamson",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textColor
-                    ),),
-                    SizedBox(height: 10,),
-                    Text("+1 (470) 918 8577",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textColor
-                    ),)
+                    Text(
+                      "Cameron Williamson",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textColor,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "+1 (470) 918 8577",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textColor,
+                      ),
+                    ),
                   ],
                 ),
                 Spacer(),
@@ -959,27 +1065,26 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> with TickerProvider
                   height: 34,
                   decoration: BoxDecoration(
                     color: AppColors.textColor,
-                    borderRadius: BorderRadius.circular(4)
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: Center(
-                    child: Text("Complete",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFFFAFAFA),
-                    ),),
+                    child: Text(
+                      "Complete",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFFAFAFA),
+                      ),
+                    ),
                   ),
-                )
-
+                ),
               ],
             ),
-          )
-
+          ),
         ],
       ),
     );
   }
-
 }
 
 /// Chart data function (fl_chart)
@@ -999,19 +1104,16 @@ LineChartData sampleLineChartData() {
       show: true,
       drawVerticalLine: false,
       getDrawingHorizontalLine: (value) {
-        return FlLine(color: Colors.grey.withValues(alpha: 0.12),
-            strokeWidth: 1);
+        return FlLine(
+          color: Colors.grey.withValues(alpha: 0.12),
+          strokeWidth: 1,
+        );
       },
     ),
     titlesData: FlTitlesData(
       show: true,
-      leftTitles: AxisTitles(
-        sideTitles:
-        SideTitles(showTitles: false),
-      ),
-      bottomTitles: AxisTitles(
-        sideTitles: SideTitles(showTitles: false),
-      ),
+      leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
     ),
@@ -1031,12 +1133,13 @@ LineChartData sampleLineChartData() {
         belowBarData: BarAreaData(
           show: true,
           gradient: LinearGradient(
-              colors: [
-                const Color(0xFF7B61FF).withValues(alpha: 0.16),
-                const Color(0xFFB28DFF).withValues(alpha: 0.06)
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter),
+            colors: [
+              const Color(0xFF7B61FF).withValues(alpha: 0.16),
+              const Color(0xFFB28DFF).withValues(alpha: 0.06),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
       ),
     ],

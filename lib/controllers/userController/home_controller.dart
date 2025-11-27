@@ -4,6 +4,7 @@ import 'package:dar_dar_foodd_delivery_app/models/User/banner_model.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/category_model.dart';
 import 'package:dar_dar_foodd_delivery_app/models/User/polular_food_and_grocery_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_client.dart';
+import 'package:dar_dar_foodd_delivery_app/views/base/custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -116,6 +117,22 @@ class HomeController extends GetxController {
       bannerList.value = data.map((e) => BannerData.fromJson(e)).toList();
     } else {
       print("Something we want wrong ==========> ${response.body}");
+    }
+    isLaoding(false);
+  }
+
+  Future<void> wishFovariteItem({required int id}) async {
+    isLaoding(true);
+
+    final Map<String, dynamic> body = {"product_id": id};
+
+    final response = await ApiClient.postData("/api/v1/wishlist/add/", body);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      showCustomSnackBar(response.body['message'], isError: false);
+      print("Successfully added to wish fovarite");
+    } else {
+      print("Something we want wrong ==========> ${response.body}");
+      showCustomSnackBar(response.body['message'], isError: true);
     }
     isLaoding(false);
   }

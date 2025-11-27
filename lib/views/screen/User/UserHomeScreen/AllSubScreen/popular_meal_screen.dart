@@ -52,6 +52,10 @@ class _PopularMealScreenState extends State<PopularMealScreen> {
                   itemBuilder: (context, index) {
                     return MealCard(
                       productModel: _homeController.propularAllFoodList[index],
+                      onTap: () {
+                        _homeController.wishFovariteItem(
+                            id: _homeController.propularAllFoodList[index].id!);
+                      },
                     );
                   },
                 ),

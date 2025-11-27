@@ -1,5 +1,5 @@
 
-import 'package:dar_dar_foodd_delivery_app/models/User/shop_banner_model';
+import 'package:dar_dar_foodd_delivery_app/models/User/shop_banner_model.dart';
 import 'package:dar_dar_foodd_delivery_app/services/api_client.dart';
 import 'package:get/get.dart';
 

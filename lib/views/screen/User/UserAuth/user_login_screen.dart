@@ -22,7 +22,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
 
   final _fromKey = GlobalKey<FormState>();
 
-  bool isCheck = false;
+
 
   @override
   Widget build(BuildContext context) {

@@ -5,12 +5,18 @@ import 'package:dar_dar_foodd_delivery_app/views/base/custom_rating_screen.dart'
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final Function() onTap;
   final AllNearbyRestaurantModel allNearbyRestaurantModel;
 
   const FoodCard({
     super.key,
-    this.icon = Icons.favorite_border,
+    this.icon,
+    this.backgroundColor,
+    this.iconColor,
+    required this.onTap,
     required this.allNearbyRestaurantModel,
   });
 
@@ -54,19 +60,22 @@ class FoodCard extends StatelessWidget {
               Positioned(
                 top: 15,
                 right: 15,
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF7F7F7),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 5,
-                      ),
-                    ],
+                child: InkWell(
+                  onTap: onTap,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: iconColor ?? Colors.transparent,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: backgroundColor ?? Colors.transparent,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Icon(icon, color: Color(0xFF89B12C), size: 24),
                   ),
-                  child: Icon(icon, color: Color(0xFF89B12C), size: 24),
                 ),
               ),
             ],
